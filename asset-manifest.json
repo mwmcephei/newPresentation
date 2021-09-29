@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/newPresentation/static/css/main.43a49296.chunk.css",
+    "main.js": "/newPresentation/static/js/main.a7c1c27c.chunk.js",
+    "main.js.map": "/newPresentation/static/js/main.a7c1c27c.chunk.js.map",
+    "runtime-main.js": "/newPresentation/static/js/runtime-main.a9650a66.js",
+    "runtime-main.js.map": "/newPresentation/static/js/runtime-main.a9650a66.js.map",
+    "static/css/2.f3add328.chunk.css": "/newPresentation/static/css/2.f3add328.chunk.css",
+    "static/js/2.d61e6921.chunk.js": "/newPresentation/static/js/2.d61e6921.chunk.js",
+    "static/js/2.d61e6921.chunk.js.map": "/newPresentation/static/js/2.d61e6921.chunk.js.map",
+    "index.html": "/newPresentation/index.html",
+    "static/css/2.f3add328.chunk.css.map": "/newPresentation/static/css/2.f3add328.chunk.css.map",
+    "static/css/main.43a49296.chunk.css.map": "/newPresentation/static/css/main.43a49296.chunk.css.map",
+    "static/js/2.d61e6921.chunk.js.LICENSE.txt": "/newPresentation/static/js/2.d61e6921.chunk.js.LICENSE.txt",
+    "static/media/allianz_bird_logo.eee76c11.png": "/newPresentation/static/media/allianz_bird_logo.eee76c11.png",
+    "static/media/theme.scss": "/newPresentation/static/media/materialdesignicons-webfont.d06df622.woff",
+    "static/media/coming-soon.58c6b560.svg": "/newPresentation/static/media/coming-soon.58c6b560.svg",
+    "static/media/error-img.352b9ab6.png": "/newPresentation/static/media/error-img.352b9ab6.png",
+    "static/media/headerLogo.81de9eb8.png": "/newPresentation/static/media/headerLogo.81de9eb8.png",
+    "static/media/logo-light.96c274da.svg": "/newPresentation/static/media/logo-light.96c274da.svg",
+    "static/media/logo.a0143fa8.svg": "/newPresentation/static/media/logo.a0143fa8.svg",
+    "static/media/maintenance.938d28ce.svg": "/newPresentation/static/media/maintenance.938d28ce.svg",
+    "static/media/megamenu-img.8b069df4.png": "/newPresentation/static/media/megamenu-img.8b069df4.png",
+    "static/media/profile-img.43b59e59.png": "/newPresentation/static/media/profile-img.43b59e59.png",
+    "static/media/verification-img.4d646fae.png": "/newPresentation/static/media/verification-img.4d646fae.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a9650a66.js",
+    "static/css/2.f3add328.chunk.css",
+    "static/js/2.d61e6921.chunk.js",
+    "static/css/main.43a49296.chunk.css",
+    "static/js/main.a7c1c27c.chunk.js"
+  ]
+}
