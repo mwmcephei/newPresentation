@@ -1,0 +1,11 @@
+{
+  "appId": "com.pmotool.android",
+  "appName": "PMO-Tool",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "allowMixedContent": true,
+  "ios": {
+    "contentInset": "always",
+    "overlay": false
+  }
+}
