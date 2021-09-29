@@ -52,7 +52,7 @@ const App = props => {
           <Route path="/" exact>
             <Overview />
           </Route>
-          <Route path="/presentaion" >
+          <Route path="/newPresentation" >
             <Overview />
           </Route>
 
