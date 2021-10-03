@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/newPresentation/static/css/main.43a49296.chunk.css",
-    "main.js": "/newPresentation/static/js/main.7d2bf804.chunk.js",
-    "main.js.map": "/newPresentation/static/js/main.7d2bf804.chunk.js.map",
+    "main.css": "/newPresentation/static/css/main.abc8f76c.chunk.css",
+    "main.js": "/newPresentation/static/js/main.c045b6dd.chunk.js",
+    "main.js.map": "/newPresentation/static/js/main.c045b6dd.chunk.js.map",
     "runtime-main.js": "/newPresentation/static/js/runtime-main.a9650a66.js",
     "runtime-main.js.map": "/newPresentation/static/js/runtime-main.a9650a66.js.map",
     "static/css/2.f3add328.chunk.css": "/newPresentation/static/css/2.f3add328.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.d61e6921.chunk.js.map": "/newPresentation/static/js/2.d61e6921.chunk.js.map",
     "index.html": "/newPresentation/index.html",
     "static/css/2.f3add328.chunk.css.map": "/newPresentation/static/css/2.f3add328.chunk.css.map",
-    "static/css/main.43a49296.chunk.css.map": "/newPresentation/static/css/main.43a49296.chunk.css.map",
+    "static/css/main.abc8f76c.chunk.css.map": "/newPresentation/static/css/main.abc8f76c.chunk.css.map",
     "static/js/2.d61e6921.chunk.js.LICENSE.txt": "/newPresentation/static/js/2.d61e6921.chunk.js.LICENSE.txt",
     "static/media/allianz_bird_logo.eee76c11.png": "/newPresentation/static/media/allianz_bird_logo.eee76c11.png",
     "static/media/theme.scss": "/newPresentation/static/media/materialdesignicons-webfont.d06df622.woff",
@@ -28,7 +28,7 @@
     "static/js/runtime-main.a9650a66.js",
     "static/css/2.f3add328.chunk.css",
     "static/js/2.d61e6921.chunk.js",
-    "static/css/main.43a49296.chunk.css",
-    "static/js/main.7d2bf804.chunk.js"
+    "static/css/main.abc8f76c.chunk.css",
+    "static/js/main.c045b6dd.chunk.js"
   ]
 }
