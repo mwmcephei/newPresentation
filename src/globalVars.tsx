@@ -1,8 +1,9 @@
 import { ReactElement } from "react"
 
-export const apiUrl = "http://localhost:4000/api"
-//export const apiUrl = "https://backend-testdata.herokuapp.com/api"   // backend hosted on heroku
-
+// export const apiUrl = "http://localhost:4000/api"
+// export const loginURL = "http://localhost:4000/simpleauth/login"
+export const apiUrl = "https://backend-testdata.herokuapp.com/api"   // backend hosted on heroku
+export const loginURL = "https://backend-testdata.herokuapp.com/simpleauth/login"
 
 export const getMax = (array: number[]): number => {
   let res = 0
@@ -99,5 +100,29 @@ const leadingZeros = (num) => {
     return "0" + asString
   } else {
     return asString
+  }
+}
+
+
+export const convertCategory = (input) => {
+  switch (input) {
+    case "GSP":
+      return "Allianz IS Global Platform"
+      break
+    case "PxQ":
+      return "Allianz IS Shared Services"
+      break
+    case "AZSE Global Governance":
+      return "Allianz Global IS Governance"
+      break
+    case "Local Services":
+      return "Embedded infrastructure Security Services"
+      break
+    case "Other Infra":
+      return "Embedded infrastructure Security Services"
+      break
+    default:
+      return input
+      break
   }
 }

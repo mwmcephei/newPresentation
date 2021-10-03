@@ -186,7 +186,7 @@ const ProjectsList = (props: { measures: Measure[] }) => {
 
                           <PieChart width={50} height={50} style={{ transform: "rotate(270deg)" }}>
                             <Pie data={getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000))}
-                              dataKey="value" outerRadius={20} innerRadius={10}
+                              dataKey="value" outerRadius={20} innerRadius={0}
                               isAnimationActive={false}
                             >
                               {getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000)).map((

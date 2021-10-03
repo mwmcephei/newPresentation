@@ -7,7 +7,7 @@ import {
   Table,
 } from "reactstrap"
 // @ts-ignore
-import { getMax, getColors, focusAreaColors, allianzBlue, structureNumberForDisplay } from "../../globalVars"
+import { getMax, getColors, focusAreaColors, allianzBlue, structureNumberForDisplay, convertCategory } from "../../globalVars"
 import { PastBudget } from "../../types"
 import _ from "lodash"
 
@@ -51,10 +51,10 @@ const ProjectsListPastBudget = (props) => {
         <Table className="project-list-table  align-middle " >
           <thead>
             <tr>
-              <th scope="col" >MID</th>
-              <th scope="col" >Security Measures</th>
+              <th scope="col" >#</th>
+              <th scope="col" >Measure Name</th>
               <th scope="col" >Budget</th>
-              <th scope="col" > Securitx Domain</th>
+              <th scope="col" >Security Domain</th>
             </tr>
           </thead>
 
@@ -78,16 +78,21 @@ const ProjectsListPastBudget = (props) => {
               {map(filterBudgetsByYear(year), (pastBudget, index2) => (
                 <tr key={index2} >
                   <td>
-                    {pastBudget.title}
+                    {index2 + 1}
                   </td>
                   <td>
-                    {pastBudget.name}
+                    <div>
+                      <b>{pastBudget.title}</b>
+                    </div>
+                    <div>
+                      {pastBudget.name}
+                    </div>
                   </td>
                   <td >
                     {structureNumberForDisplay(pastBudget.budget, true)} kEUR
                   </td>
                   <td >
-                    {pastBudget.category}
+                    {convertCategory(pastBudget.category)}
                   </td>
                 </tr>
               ))}
@@ -108,26 +113,3 @@ const ProjectsListPastBudget = (props) => {
 }
 
 export default withRouter(ProjectsListPastBudget)
-
-
-
-
-/*
-
-<tbody className="">
-            {map(props.pastBudgets, (pastBudget, index) => (
-              <tr key={index} >
-                <td>
-                  {pastBudget.name}
-                </td>
-                <td >
-                  {pastBudget.budget}
-                </td>
-                <td >
-                  {pastBudget.category}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-
-          */

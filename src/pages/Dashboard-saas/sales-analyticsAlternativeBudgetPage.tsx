@@ -56,7 +56,7 @@ const SalesAnalytics = ({ title, data, isQuantity }): ReactElement => {
 
             <div className="text-center text-muted">
               <Row>
-                <Col xs="6" xm="6" lg="3" xl="3">
+                <Col xs="12" xm="12" lg="12" xl="12">
                   <div>
                     <div className="mt-4">
                       <span className="mb-2 text-truncate">
@@ -74,7 +74,7 @@ const SalesAnalytics = ({ title, data, isQuantity }): ReactElement => {
                     </div>
                   </div>
                 </Col>
-                <Col xs="6" xm="6" lg="4" xl="4">
+                <Col xs="12" xm="12" lg="12" xl="12">
                   <div>
                     <div className="mt-4">
                       <span className="mb-2 text-truncate">
@@ -92,7 +92,7 @@ const SalesAnalytics = ({ title, data, isQuantity }): ReactElement => {
                     </div>
                   </div>
                 </Col>
-                <Col xs="12" xm="12" lg="5" xl="5" >
+                <Col xs="12" xm="12" lg="12" xl="12" >
                   <div className={window.innerWidth < 1400 ? "ml-4 d-flex justify-content-around" : ""}>
                     <div className="mt-4 text-center ml-4">
                       <span className="mb-2 text-truncate">

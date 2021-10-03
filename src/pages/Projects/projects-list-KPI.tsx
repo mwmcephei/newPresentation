@@ -49,7 +49,7 @@ const ProjectsListKPI = ({ kpiData, kpiName }): ReactElement => {
         </Col>
         <Col className="d-flex justify-content-center align-items-center" xs="12" xm="6" lg="3" xl="3">
           <Badge className="p-2" style={{ background: "#97d48a", fontSize: "12px", width: "80px" }}>
-            <b>{kpiData.actuals} / {kpiData.plan2}</b>
+            <b>{kpiData.actuals} / {kpiData.target}</b>
           </Badge>
 
         </Col>
@@ -74,15 +74,15 @@ const ProjectsListKPI = ({ kpiData, kpiName }): ReactElement => {
 
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && plans[0]}</div>
+                      <div>{plans && "31-" + plans[0].split("/")[0]}</div>
                     </th>
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && plans[1]}</div>
+                      <div>{plans && "31-" + plans[1].split("/")[0]}</div>
                     </th>
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && plans[2]}</div>
+                      <div>{plans && "31-" + plans[2].split("/")[0]}</div>
                     </th>
 
                     <th scope="col" style={{ maxWidth: "60px" }}>

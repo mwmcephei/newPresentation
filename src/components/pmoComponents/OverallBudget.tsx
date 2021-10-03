@@ -1,5 +1,5 @@
 import BreadcrumbOnlyTitle from "components/Common/BreadcrumbOnlyTitle"
-import { apiUrl, structureNumberForDisplay } from "globalVars"
+import { apiUrl, convertCategory, structureNumberForDisplay } from "globalVars"
 import SalesAnalytics from "pages/Dashboard-saas/sales-analyticsAlternativeBudgetPage"
 import React, { ReactElement } from "react"
 import { useState, useEffect } from "react"
@@ -10,40 +10,45 @@ import ProjectsListPastBudget from "../../pages/Projects/projects-list-PastBudge
 const OverallBudget = (): ReactElement => {
   const [pastBudgets, setPastBudgets] = useState<PastBudget[]>()
   /*
-  Allianz Global IS Governance
-  Allianz Human Firewall
-  Allianz IS Global Platform
-  Allianz IS Shared Services
-  Embedded infrastructure Security Services
+    Allianz Global IS Governance = AZSE Global Governance, 
+    Allianz Human Firewall, 
+    Allianz IS Global Platform = GSP,
+     Allianz IS Shared Services = PxQ, 
+     Embedded infrastructure Security Services = Other Infra + Local Services
+
 */
+
+
+
+
   const [data, setData] = useState([
     {
-      categoryName: "GSP",
+      categoryName: convertCategory("GSP"),
       amount: 40,
       budget: 53459932
     },
     {
-      categoryName: "PxQ",
+      categoryName: convertCategory("PxQ"),
       amount: 14,
       budget: 15177645
     },
     {
-      categoryName: "Other Infra",
+      categoryName: convertCategory("Other Infra"),
       amount: 42,
       budget: 36880847
     },
     {
-      categoryName: "Local Services",
+      categoryName: convertCategory("Local Services"),
       amount: 9,
       budget: 13764934
     },
     {
-      categoryName: "AZSE Global Governance",
+      categoryName: convertCategory("AZSE Global Governance"),
       amount: 47,
       budget: 33527640
     },
     {
-      categoryName: "Allianz Human Firewall",
+      categoryName: convertCategory("Allianz Human Firewall"),
       amount: 8,
       budget: 6216427
     },

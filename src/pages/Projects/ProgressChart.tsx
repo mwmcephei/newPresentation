@@ -72,7 +72,7 @@ const ProgressChart = (props) => {
         <React.Fragment>
             <PieChart width={30} height={30} style={{ transform: "rotate(270deg)" }}>
                 <Pie data={getData()}
-                    dataKey="value" outerRadius={10} innerRadius={5}
+                    dataKey="value" outerRadius={10} innerRadius={0}
                     isAnimationActive={false}
                 >
                     {getData().map((

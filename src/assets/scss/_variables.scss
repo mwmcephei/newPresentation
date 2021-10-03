@@ -105,8 +105,8 @@ $grays: (
 );
 
 // fusv-enable
-
-$blue: #ffffff; // #556ee6;
+$buttonBlue:  #556ee6;
+$blue:  #f8f9fa; // #556ee6;
 $indigo: #564ab1;
 $purple: #6f42c1;
 $pink: #e83e8c;
@@ -119,6 +119,7 @@ $cyan: #50a5f1;
 
 // scss-docs-start colors-map
 $colors: (
+  "buttonBlue": $buttonBlue,
   "blue": $blue,
   "indigo": $indigo,
   "purple": $purple,
@@ -134,7 +135,7 @@ $colors: (
   "gray-dark": $gray-800,
 );
 // scss-docs-end colors-map
-
+$buttonPrimary: $buttonBlue;
 $primary: $blue;
 $secondary: $gray-600;
 $success: $green;
@@ -146,6 +147,7 @@ $dark: $gray-800;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
+  "buttonPrimary": $buttonPrimary,
   "primary": $primary,
   "secondary": $secondary,
   "success": $success,

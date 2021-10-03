@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom"
 import { connect } from "react-redux"
@@ -23,12 +23,13 @@ import BudgetReport from "./components/pmoComponents/BudgetReport"
 import OverallBudget from "./components/pmoComponents/OverallBudget"
 // Import scss
 import "./assets/scss/theme.scss"
+import Login from "components/pmoComponents/Login"
 
 
 
 
 const App = props => {
-
+  const [loggedIn, setLoggedIn] = useState(false)
 
   function getLayout() {
     let layoutCls = VerticalLayout
@@ -47,13 +48,13 @@ const App = props => {
   return (
     <React.Fragment>
       <Router>
-        <Index />
+        {loggedIn && <Index />}
         <Switch>
           <Route path="/" exact>
-            <Overview />
+            <Login login={setLoggedIn} />
           </Route>
           <Route path="/newPresentation" >
-            <Overview />
+            <Login login={setLoggedIn} />
           </Route>
 
           <Route path="/dashboard">
