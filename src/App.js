@@ -45,41 +45,57 @@ const App = props => {
   }
 
   const Layout = getLayout()
+
+
+
+
   return (
     <React.Fragment>
       <Router>
-        {loggedIn && <Index />}
-        <Switch>
-          <Route path="/" exact>
-            <Login login={setLoggedIn} />
-          </Route>
-          <Route path="/newPresentation" >
-            <Login login={setLoggedIn} />
-          </Route>
+        {loggedIn ? <React.Fragment>
+          <Index />
+          <Switch>
+            <Route path="/" exact>
+              <Login login={setLoggedIn} />
+            </Route>
+            <Route path="/newPresentation" >
+              <Login login={setLoggedIn} />
+            </Route>
 
-          <Route path="/dashboard">
-            <Overview />
-          </Route>
-          <Route path="/measure_overview/:filter">
-            <MeasureOverview />
-          </Route>
-          <Route path="/measure_overview" >
-            <MeasureOverview />
-          </Route>
+            <Route path="/dashboard">
+              <Overview />
+            </Route>
+            <Route path="/measure_overview/:filter">
+              <MeasureOverview />
+            </Route>
+            <Route path="/measure_overview" >
+              <MeasureOverview />
+            </Route>
 
-          <Route path="/measureReports/:measureID">
-            <MeasureReports />
-          </Route>
-          <Route path="/measureReports">
-            <MeasureReports />
-          </Route>
-          <Route path="/budget_reports">
-            <BudgetReport />
-          </Route>
-          <Route path="/overall_budget">
-            <OverallBudget />
-          </Route>
-        </Switch>
+            <Route path="/measureReports/:measureID">
+              <MeasureReports />
+            </Route>
+            <Route path="/measureReports">
+              <MeasureReports />
+            </Route>
+            <Route path="/budget_reports">
+              <BudgetReport />
+            </Route>
+            <Route path="/overall_budget">
+              <OverallBudget />
+            </Route>
+          </Switch>
+        </React.Fragment>
+          :
+
+          <Switch>
+            <Route path="/" exact>
+              <Login login={setLoggedIn} />
+            </Route>
+            <Route path="/newPresentation" >
+              <Login login={setLoggedIn} />
+            </Route>
+          </Switch>}
       </Router>
     </React.Fragment>
   )

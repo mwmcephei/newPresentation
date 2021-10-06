@@ -2,7 +2,7 @@ import React, { ReactElement, useState, useEffect } from "react"
 
 import { Container, Row, Col, Card, CardBody, CardTitle, Spinner } from "reactstrap"
 import { useParams } from "react-router-dom"
-import { apiUrl } from "../../globalVars"
+import { apiUrl, formatBudgetDate, formatKPIDate, formatStatusDate } from "../../globalVars"
 import ProjectDetail from "pages/Projects/ProjectOverview/projectDetail"
 import TeamMembers from "pages/Projects/ProjectOverview/teamMembers"
 import TeamMembersNew from "pages/Projects/ProjectOverview/teamMembersNew"
@@ -67,7 +67,7 @@ const MeasureReports = (props): ReactElement => {
       .then(response => {
         setStatusDate(response.statusDate)
         setBudgetDate(response.budgetDate)
-        setKPIDate(response.kpiDates[1])
+        setKPIDate(formatKPIDate(response.kpiDates[1]))
       })
       .catch(error => {
         console.log(error)
@@ -116,13 +116,14 @@ const MeasureReports = (props): ReactElement => {
 
 
 
+
   const measureReportStatus = currentMeasure && <TotalSellngProduct artefacts={currentMeasure.artefact}
     budget={currentMeasure.budget}
     risks={currentMeasure.risk}
-    date1={statusDate} />
+    date1={statusDate && formatStatusDate(statusDate)} />
 
   const artefactsChart = currentMeasure && <TapVisitors measureID={currentMeasure._id}
-    totalApprovedBudget={currentMeasure.budgetDetail.totalApprovedBudget} date1={statusDate} />
+    totalApprovedBudget={currentMeasure.budgetDetail.totalApprovedBudget} date1={statusDate && formatStatusDate(statusDate)} />
 
   const budgetChart = currentMeasure && <LineColumnArea measure={currentMeasure} />
 
@@ -162,7 +163,7 @@ const MeasureReports = (props): ReactElement => {
                 <Col xs="12" xm="6" lg="6" xl="6" >
                   <Card style={{ height: kpiCardHeight }}>
                     <CardBody>
-                      <CardTitle className="mb-4">KPI {kpiDate}</CardTitle>
+                      <CardTitle className="mb-4">KPI {formatKPIDate(kpiDate)}</CardTitle>
                       {kpi}
                     </CardBody>
                   </Card>
@@ -176,7 +177,7 @@ const MeasureReports = (props): ReactElement => {
                   <Card style={{ height: "500px" }}>
                     <CardBody>
                       <CardTitle className="mb-4">
-                        Budget {budgetDate}
+                        Budget {formatBudgetDate(budgetDate)}
                       </CardTitle>
                       {budgetChart}
                     </CardBody>

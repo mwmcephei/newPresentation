@@ -1,6 +1,6 @@
 import { ReactElement } from "react"
 
-// export const apiUrl = "http://localhost:4000/api"
+// export const apiUrl = "http://localhost:80/api"   // Docker: 80, regular: 4000
 // export const loginURL = "http://localhost:4000/simpleauth/login"
 export const apiUrl = "https://backend-testdata.herokuapp.com/api"   // backend hosted on heroku
 export const loginURL = "https://backend-testdata.herokuapp.com/simpleauth/login"
@@ -125,4 +125,88 @@ export const convertCategory = (input) => {
       return input
       break
   }
+}
+
+
+export const formatStatusDate = (rawDate) => {
+  const rawDay = rawDate.split(",")[0].split(" ")[1]
+  let index;
+  for (let i = 0; i < rawDay.length; i++) {
+    if (!isLetter(rawDate[i])) {
+      index = i
+      break
+    }
+  }
+  let day = "01"
+  if (index) {
+    day = rawDate.substring(0, index)
+    if (day.length < 2) {
+      day = "0" + day
+    }
+  }
+  const year = rawDate.split(", ")[1]
+  let month;
+  switch (rawDate.substring(0, 1)) {
+    case "F":
+      month = "02"
+      break
+    case "S":
+      month = "09"
+      break
+    case "O":
+      month = "10"
+      break
+    case "N":
+      month = "11"
+      break
+    case "D":
+      month = "12"
+      break
+    default:
+      month = "01"
+      break
+  }
+  switch (rawDate.substring(0, 2)) {
+    case "Ja":
+      month = "01"
+      break
+    case "Ap":
+      month = "04"
+      break
+    case "Ma":
+      if (rawDate.substring(0, 3) === "Mai") {
+        month = "05"
+      } else {
+        month = "03"
+      }
+      break
+    case "Ju":
+      if (rawDate.substring(0, 3) === "Jun") {
+        month = "06"
+      } else {
+        month = "07"
+      }
+      break
+    case "Au":
+      month = "08"
+      break
+    default:
+      month = "01"
+      break
+  }
+  return day + "." + month + "." + year
+}
+function isLetter(c) {
+  return c.toLowerCase() != c.toUpperCase();
+}
+
+export const formatKPIDate = (rawDate) => {
+  const day = rawDate.split(".")[0]
+  const month = rawDate.split(".")[1]
+  const year = rawDate.split(".")[2].length < 4 ? "20" + rawDate.split(".")[2] : rawDate.split(".")[2]
+  return day + "." + month + "." + year
+}
+
+export const formatBudgetDate = (rawDate) => {
+  return rawDate.split("-")[2] + "." + rawDate.split("-")[1] + "." + rawDate.split("-")[0]
 }

@@ -9,14 +9,7 @@ import ProjectsListPastBudget from "../../pages/Projects/projects-list-PastBudge
 
 const OverallBudget = (): ReactElement => {
   const [pastBudgets, setPastBudgets] = useState<PastBudget[]>()
-  /*
-    Allianz Global IS Governance = AZSE Global Governance, 
-    Allianz Human Firewall, 
-    Allianz IS Global Platform = GSP,
-     Allianz IS Shared Services = PxQ, 
-     Embedded infrastructure Security Services = Other Infra + Local Services
 
-*/
 
 
 
@@ -34,14 +27,14 @@ const OverallBudget = (): ReactElement => {
     },
     {
       categoryName: convertCategory("Other Infra"),
-      amount: 42,
-      budget: 36880847
+      amount: 42 + 9,
+      budget: 36880847 + 13764934
     },
-    {
-      categoryName: convertCategory("Local Services"),
-      amount: 9,
-      budget: 13764934
-    },
+    /* {
+       categoryName: convertCategory("Local Services"),
+       amount: 9,
+       budget: 13764934
+     },*/
     {
       categoryName: convertCategory("AZSE Global Governance"),
       amount: 47,

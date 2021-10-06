@@ -101,15 +101,7 @@ const SalesAnalytics = ({ title, data, isQuantity }): ReactElement => {
                       </span>
                       <h5 className="mt-2">{isQuantity ? dataSeries[4] : structureNumberForDisplay(dataSeries[4], true)} {!isQuantity && "kEUR"}</h5>
                     </div>
-                    <div className="mt-4">
-                      <span className="mb-2 text-truncate">
-                        <span>{labels[5]} </span>
-                        <i className="mdi mdi-circle  me-1" style={{ color: colors[5] }} />
-                      </span>
-                      <h5 className="mt-2">
-                        {isQuantity ? dataSeries[5] : structureNumberForDisplay(dataSeries[5], true)} {!isQuantity && "kEUR"}
-                      </h5>
-                    </div>
+
                   </div>
                 </Col>
 

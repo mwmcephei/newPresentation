@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
-import { apiUrl, getMax } from "../../globalVars"
+import { apiUrl, formatBudgetDate, formatKPIDate, formatStatusDate, getMax } from "../../globalVars"
 import { useHistory } from "react-router-dom"
 import {
     Container,
@@ -46,8 +46,14 @@ const Overview = (): ReactElement => {
     const [overallStatusState, setOverallStatus] = useState<string[]>(["green", "yellow", "red"])
     const [kpiStates, setKpiStates] = useState<string[]>(["Behind ", "On Track ", "Achieved "])
 
+    function isPushNotificationSupported() {
+        return "serviceWorker" in navigator && "PushManager" in window;
+    }
 
     useEffect(() => {
+        console.log("APP")
+        console.log(navigator)
+
         fetch(apiUrl + "/budget")
             .then(response => response.json())
             .then(response => {
@@ -168,7 +174,7 @@ const Overview = (): ReactElement => {
             totalSpent += m.budgetDetail.spentBudget
             totalApproved += m.budgetDetail.totalApprovedBudget
         })
-        return <SalesAnalyticsAlternative title={"Budget: Approved & Spent " + overviewData.budgetDate}
+        return <SalesAnalyticsAlternative title={"Budget: Approved & Spent " + formatBudgetDate(overviewData.budgetDate)}
             green={totalApproved}
             yellow={totalSpent}
             labels={["Spent ", "Approved "]}
@@ -183,6 +189,7 @@ const Overview = (): ReactElement => {
         }
         return budgetChart
     }
+
 
 
 
@@ -221,7 +228,7 @@ const Overview = (): ReactElement => {
                                 red={measuresPieChart.redCounter}
                                 labels={["Status ", "Status ", "Status "]}
                                 isKPIChart={false}
-                                date={overviewData.statusDate}
+                                date={formatStatusDate(overviewData.statusDate)}
                             />
                         </Col>
                         <Col xs="12" xm="6" lg="6" xl="6">
@@ -231,7 +238,7 @@ const Overview = (): ReactElement => {
                                 red={measurePKI_pieChart.redCounter}
                                 labels={kpiStates}
                                 isKPIChart={true}
-                                date={overviewData.kpiDates[1]}
+                                date={formatKPIDate(overviewData.kpiDates[1])}
                             />
                         </Col>
                     </Row>
@@ -247,7 +254,7 @@ const Overview = (): ReactElement => {
                         <Col xs="12" xm="6" lg="6" xl="6">
                             <Card>
                                 <CardBody>
-                                    <CardTitle className="mb-4">Monthly Burn Rate {overviewData.budgetDate}</CardTitle>
+                                    <CardTitle className="mb-4">Monthly Burn Rate {formatBudgetDate(overviewData.budgetDate)}</CardTitle>
                                     {getBudgetChart(labels, monthlySpendings, approved)}
                                 </CardBody>
                             </Card>

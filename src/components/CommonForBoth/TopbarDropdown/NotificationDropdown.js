@@ -44,7 +44,7 @@ const NotificationDropdown = props => {
           </div>
 
           <SimpleBar style={{ height: "230px" }}>
-            <Link to="/measureReports/61520061c65dd313d6469f36" className="text-reset notification-item">
+            <Link to="/measureReports/615ab5e56f418899f9b4b82a" className="text-reset notification-item">
               <div className="media">
                 <div className="avatar-xs me-3">
                   <span className="avatar-title bg-warning rounded-circle font-size-16"></span>

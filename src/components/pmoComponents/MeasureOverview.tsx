@@ -22,15 +22,9 @@ const MeasureOverview = (): ReactElement => {
       .then(response => response.json())
       .then(response => {
         if (filter) {
-          console.log("Filter")
-          console.log(filter)
-          console.log(overallStates.indexOf(filter))
-          console.log("--------")
           const filteredMeasures = response.filter(m => {
             //    if (m.kpiProgress === kpiStates.indexOf(filter)) {
             if (getMax([m.artefact, m.budget, m.risk]) === overallStates.indexOf(filter)) {
-              console.log(filter)
-              console.log(m)
               return m
             }
           })

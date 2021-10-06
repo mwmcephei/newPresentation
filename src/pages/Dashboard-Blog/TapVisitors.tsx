@@ -22,16 +22,6 @@ function TapVisitors({ measureID, totalApprovedBudget, date1 }: TapVisitorsProps
       .then(response => response.json())
       .then(response => {
         setArtefacts(response)
-
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log(response)
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("totalApprovedBudget")
-        console.log(totalApprovedBudget)
       })
       .catch(error => {
         console.log(error)
@@ -43,16 +33,6 @@ function TapVisitors({ measureID, totalApprovedBudget, date1 }: TapVisitorsProps
       .then(response => response.json())
       .then(response => {
         setArtefacts(response)
-
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log(response)
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("---------------------")
-        console.log("totalApprovedBudget")
-        console.log(totalApprovedBudget)
       })
       .catch(error => {
         console.log(error)
@@ -139,7 +119,7 @@ function TapVisitors({ measureID, totalApprovedBudget, date1 }: TapVisitorsProps
                 {artefacts && artefacts.map(art => {
                   console.log(progressAsString(art.progress))
                   return <li className="list-group-item">
-                    <div className="py-2">
+                    <div className="">
                       <div className="font-size-14 d-flex justify-content-between">
                         {window.innerWidth > 1000 ?
                           <div className=""
