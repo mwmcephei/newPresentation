@@ -33,7 +33,7 @@ import { title } from "process"
 
 
 const App = props => {
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     requestPermission()
@@ -125,10 +125,10 @@ const App = props => {
           <Index />
           <Switch>
             <Route path="/" exact>
-              <Overview />
+              <Login login={setLoggedIn} />
             </Route>
             <Route path="/newPresentation" >
-              <Overview />
+              <Login login={setLoggedIn} />
             </Route>
 
             <Route path="/upload" >
@@ -162,7 +162,7 @@ const App = props => {
           :
 
           <Switch>
-            <Route path="/" exact>
+            <Route path="/upload" exact>
               <FileUpload />
             </Route>
             <Route path="/newPresentation" >
