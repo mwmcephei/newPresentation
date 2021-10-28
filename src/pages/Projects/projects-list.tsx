@@ -111,10 +111,10 @@ const ProjectsList = (props: { measures: Measure[] }) => {
                         <div className="d-flex flex-row align-items-center  " >
                           <div className="p-0 m-0 d-flex flex-column" style={{ minWidth: "180px", maxWidth: "200px" }}>
                             <div>
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> ML: {checkLength(measure.measureLead)}
+                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> ML: {checkLength(measure.measureLead.split("-")[0])}
                             </div>
                             <div>
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> MS: {checkLength(measure.measureSponsor)}
+                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> MS: {checkLength(measure.measureSponsor.split("-")[0])}
                             </div>
                           </div>
                           <div className="d-none d-xl-block  d-flex flex-column m-2">

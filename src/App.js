@@ -25,11 +25,73 @@ import OverallBudget from "./components/pmoComponents/OverallBudget"
 import "./assets/scss/theme.scss"
 import Login from "components/pmoComponents/Login"
 
-
+import { LocalNotification, LocalNotifications } from '@capacitor/local-notifications'
+import Plugin from "@capacitor/core"
+import { allianzBlue, apiUrl } from "globalVars"
+import FileUpload from "components/pmoComponents/FileUpload"
+import { title } from "process"
 
 
 const App = props => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
+
+  useEffect(() => {
+    requestPermission()
+    const interval = setInterval(() => {
+      scheduleNotification()
+    }, 30 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+
+  async function requestPermission() {
+    await LocalNotifications.requestPermissions()
+  }
+
+  async function scheduleNotification() {
+    fetch(apiUrl + "/getNotifications/" + false)
+      .then(response => response.json())
+      .then(response => {
+        response.forEach(async notification => {
+          console.log("notification")
+          console.log(notification.seen)
+          if (!notification.seen) {
+            await LocalNotifications.schedule({
+              notifications: [
+                {
+                  title: "test",
+                  body: "testbody",
+                  id: 1,
+                }
+              ]
+            })
+          }
+        });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+
+    /*
+    await LocalNotifications.schedule({
+      notifications: [
+        {
+          title: "test",
+          body: "testbody",
+          id: 1,
+        }
+      ]
+    })
+    */
+  }
+
+
+
+
+
+
+
 
   function getLayout() {
     let layoutCls = VerticalLayout
@@ -47,7 +109,14 @@ const App = props => {
   const Layout = getLayout()
 
 
-
+  /*
+  <Route path="/" exact>
+                <Login login={setLoggedIn} />
+              </Route>
+              <Route path="/newPresentation" >
+                <Login login={setLoggedIn} />
+              </Route>
+              */
 
   return (
     <React.Fragment>
@@ -56,10 +125,14 @@ const App = props => {
           <Index />
           <Switch>
             <Route path="/" exact>
-              <Login login={setLoggedIn} />
+              <Overview />
             </Route>
             <Route path="/newPresentation" >
-              <Login login={setLoggedIn} />
+              <Overview />
+            </Route>
+
+            <Route path="/upload" >
+              <FileUpload />
             </Route>
 
             <Route path="/dashboard">
@@ -90,7 +163,7 @@ const App = props => {
 
           <Switch>
             <Route path="/" exact>
-              <Login login={setLoggedIn} />
+              <FileUpload />
             </Route>
             <Route path="/newPresentation" >
               <Login login={setLoggedIn} />

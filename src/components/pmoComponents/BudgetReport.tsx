@@ -103,7 +103,7 @@ const BudgetReport = (): ReactElement => {
               <Card>
                 <CardBody >
                   <CardTitle className="mb-4">Budget Overview</CardTitle>
-                  {budgetChart()}
+                  {measures && monthlySpendings && approved && budgetChart()}
                 </CardBody>
               </Card>
             </Col>

@@ -78,6 +78,14 @@ const OverallBudget = (): ReactElement => {
     return result
   }
 
+  const getUniqueYears = (): number[] => {
+    let allYears = []
+    pastBudgets && pastBudgets.map(pb => {
+      allYears.push(pb.year)
+    })
+    console.log([...new Set(allYears)])
+    return [...new Set(allYears)]
+  }
 
 
 
@@ -93,14 +101,21 @@ const OverallBudget = (): ReactElement => {
           <Row>
             <Container>
               <Card>
-                <CardBody className="d-flex justify-content-around align-items-center">
-                  <h5>
-                    Amount of Measures: {pastBudgets && pastBudgets.length}
+
+                <CardBody className="">
+                  <h4 className="card-title ">From {getUniqueYears()[0]} to {getUniqueYears()[getUniqueYears().length - 1]}</h4>
+
+                  <div className="d-flex justify-content-around align-items-center">
+
+                    <h5>
+                      Amount of Measures: {pastBudgets && pastBudgets.length}
+                    </h5>
+                    <h5>
+                      Total Budget: {pastBudgets &&
+                        structureNumberForDisplay(pastBudgets.map(pb => { return pb.budget }).reduce((partial_sum, a) => partial_sum + a, 0), true)} kEUR
                   </h5>
-                  <h5>
-                    Total Budget: {pastBudgets &&
-                      structureNumberForDisplay(pastBudgets.map(pb => { return pb.budget }).reduce((partial_sum, a) => partial_sum + a, 0), true)} kEUR
-                  </h5>
+                  </div>
+
                 </CardBody>
               </Card>
             </Container>
@@ -122,7 +137,7 @@ const OverallBudget = (): ReactElement => {
           </Row>
 
           <Row>
-            <ProjectsListPastBudget pastBudgets={pastBudgets} />
+            <ProjectsListPastBudget pastBudgets={pastBudgets} uniqueYears={getUniqueYears()} />
           </Row>
         </Container>
       </div>

@@ -68,6 +68,7 @@ export type Team = {
     measureSponsor: string,
     lineOrgSponsor: string,
     solutionManager: string,
+    pmo: boolean
 }
 
 export type DividedName = {

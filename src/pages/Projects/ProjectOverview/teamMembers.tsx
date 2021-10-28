@@ -23,7 +23,7 @@ const TeamMembers = (props: Team): ReactElement => {
   return (
 
 
-    <Card style={{ height: "380px" }}>
+    <Card style={{ height: "400px" }}>
       <CardBody>
         <CardTitle className="mb-4">Team</CardTitle>
 

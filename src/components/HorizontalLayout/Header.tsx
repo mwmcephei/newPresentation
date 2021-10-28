@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import ReactDrawer from "react-drawer"
-
+//import { CallNumber } from '@ionic-native/call-number/ngx';
+import { CallNumber } from 'capacitor-call-number';
 import { connect } from "react-redux"
 
 import { Link } from "react-router-dom"
@@ -17,10 +18,16 @@ import logo_small from "../../assets/images/allianz_bird_logo.png"
 import headerLogog from "../../assets/images/headerLogo.png"
 //i18n
 import { withTranslation } from "react-i18next"
+import { Button } from "reactstrap"
+import { apiUrl } from "globalVars";
+
+
+
 
 const Header = props => {
   const [position, setPosition] = useState("")
   const [open, setOpen] = useState(false)
+
 
   useEffect(() => {
     props.toggleLeftmenu(false)
@@ -34,6 +41,13 @@ const Header = props => {
 
   const onDrawerClose = () => {
     setOpen(false)
+  }
+
+
+
+  const phoneCall = async () => {
+
+    //   await CallNumber.call({ number: '01771628540', bypassAppChooser: true });
   }
 
   function toggleFullscreen() {
@@ -92,10 +106,19 @@ const Header = props => {
             </button>
           </div>
 
+          { /*  <Button
+            color="buttonPrimary"
+            className="w-md"
+            onClick={() => phoneCall()}
+          >
+            Notification
+       </Button>  
+          <a style={{ color: "black" }} href="tel:+491771628540">Click to Call!</a>
+*/}
           <div className="d-flex">
             <NotificationDropdown />
 
-            <ProfileMenu />
+            { /*           <ProfileMenu />  */}
           </div>
         </div>
       </header>
@@ -107,6 +130,8 @@ const Header = props => {
 }
 
 Header.propTypes = {
+  //  checkForNotifications: PropTypes.any,
+  //  localPush: PropTypes.any,
   leftMenu: PropTypes.any,
   showRightSidebar: PropTypes.any,
   showRightSidebarAction: PropTypes.func,

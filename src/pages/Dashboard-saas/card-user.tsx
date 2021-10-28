@@ -44,7 +44,7 @@ function CardUser(props: overviewPropType): ReactElement {
 
   return (
     <div>
-      <Card style={{ height: "380px" }}>
+      <Card style={{ height: "400px" }}>
         <CardBody>
           <CardTitle className="mb-1">IT Security Initiative</CardTitle>
           <h6 className="card-subtitle mb-3 ">HY2 2021</h6>

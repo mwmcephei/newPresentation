@@ -16,7 +16,7 @@ import LineColumnArea from "pages/AllCharts/apex/LineColumnArea"
 import SalesAnalyticsAlternative from 'pages/Dashboard-saas/sales-analyticsAlternative'
 import SalesAnalytics from 'pages/Dashboard-saas/sales-analytics'
 import BreadcrumbOnlyTitle from 'components/Common/BreadcrumbOnlyTitle';
-import TeamMembers from 'pages/Projects/ProjectOverview/teamMembersPMO';
+import TeamMembers from 'pages/Projects/ProjectOverview/teamMembersNew';
 
 
 type OverviewType = {
@@ -147,9 +147,11 @@ const Overview = (): ReactElement => {
 
     const getOverview = (overViewProps: OverviewType): ReactElement => {
         const colorCounters = [0, 0, 0]
+        let budgetSum = 0
         measures.map(m => {
             const x = getMax([m.artefact, m.budget, m.risk])        // overall status of measure
             colorCounters[x] = colorCounters[x] + 1
+            budgetSum = budgetSum + m.budgetDetail.totalApprovedBudget
         })
         const overallStatus = colorCounters.findIndex(item => item === getMax(colorCounters))
         let overview = <div>overview</div>
@@ -157,7 +159,7 @@ const Overview = (): ReactElement => {
             overview = <div style={{ cursor: "pointer" }}
                 onClick={() => { history.push("/measure_overview/") }}>
                 <CardUser signal={overallStatus}
-                    budget={overViewProps.totalBudget}
+                    budget={budgetSum} //{overViewProps.totalBudget}
                     numberOfMeasures={overViewProps.measures.length}
                     overallProgress={overViewProps.progress * 100}
                     kpiProgress={overViewProps.kpiProgress}
@@ -212,7 +214,12 @@ const Overview = (): ReactElement => {
                             {getOverview(overviewData)}
                         </Col>
                         <Col xs="12" xm="6" lg="6" xl="6">
-                            <TeamMembers />
+                            <TeamMembers lead={"Ralf Schneider"}
+                                measureSponsor={"Marina Dührkop"}
+                                lineOrgSponsor={"Julian Steinfeld"}
+                                solutionManager={"Manuel Hahn"}
+                                pmo={true}
+                            />
                         </Col>
                     </Row>
                 </Container>
@@ -252,7 +259,8 @@ const Overview = (): ReactElement => {
                             {getBudgetPieChart()}
                         </Col>
                         <Col xs="12" xm="6" lg="6" xl="6">
-                            <Card>
+                            <Card style={{ cursor: "pointer" }}
+                                onClick={() => { history.push("/budget_reports/") }}>
                                 <CardBody>
                                     <CardTitle className="mb-4">Monthly Burn Rate {formatBudgetDate(overviewData.budgetDate)}</CardTitle>
                                     {getBudgetChart(labels, monthlySpendings, approved)}

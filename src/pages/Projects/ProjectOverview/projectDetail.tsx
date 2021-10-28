@@ -57,10 +57,10 @@ const ProjectDetail = ({ currentMeasure }): ReactElement => {
 
   return (
 
-    <Card style={{ height: cardSize }} >
+    <Card style={{ height: "400px" }} >
       <CardBody className="px-4 d-flex flex-column justify-content-between" >
-        <Row>
-          <Row>
+        <Row style={{ height: "280px" }} className="">
+          <Row style={{ height: "100px" }}>
             <div className="d-flex align-items-center "  >
               <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex justify-content-center text-center align-items-center
@@ -80,10 +80,10 @@ const ProjectDetail = ({ currentMeasure }): ReactElement => {
 
 
 
-          <Row>
+          <Row className="overflow-auto " style={{ height: "180px" }}>
             <h6 className=" mt-4"><b>Description:</b></h6>
             <p className=" ">
-              {shortenText(currentMeasure.description)}
+              {currentMeasure.description}
             </p>
 
           </Row>
@@ -91,7 +91,7 @@ const ProjectDetail = ({ currentMeasure }): ReactElement => {
 
 
 
-        <Row className="task-dates">
+        <Row className="task-dates" style={{ height: "120px" }}>
           <Col className="d-flex justify-content-start" >
 
             <div className=" d-flex flex-row align-items-center ">
@@ -113,9 +113,6 @@ const ProjectDetail = ({ currentMeasure }): ReactElement => {
                 <p className=" mb-0">{currentMeasure.time.split(" - ")[1]}</p>
               </div>
             </div>
-
-
-
           </Col>
         </Row>
 

@@ -4,8 +4,17 @@
   "webDir": "build",
   "bundledWebRuntime": false,
   "allowMixedContent": true,
+  "ios.minVersion": "13.0",
   "ios": {
     "contentInset": "always",
     "overlay": false
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#488AFF",
+      "sound": "beep.wav",
+      "allowWhileIdle": true
+    }
   }
 }

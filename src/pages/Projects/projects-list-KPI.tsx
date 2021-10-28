@@ -38,6 +38,22 @@ const ProjectsListKPI = ({ kpiData, kpiName }): ReactElement => {
   }
 
 
+  const lastDayOfMonthDateFormat = (input) => {
+    "31-" + input.split("/")[0]
+    const monthString = input.split("/")[0]
+    const days31 = [1, 3, 5, 7, 8, 10, 12]
+    const days30 = [4, 6, 9, 11]
+    if (days31.includes(parseInt(monthString))) {
+      return "31-" + monthString
+    } else if (days30.includes(parseInt(monthString))) {
+      return "30-" + monthString
+    } else {
+      return "28-" + monthString
+    }
+
+  }
+
+
 
   return (
     <div >
@@ -74,15 +90,15 @@ const ProjectsListKPI = ({ kpiData, kpiName }): ReactElement => {
 
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && "31-" + plans[0].split("/")[0]}</div>
+                      <div>{plans && lastDayOfMonthDateFormat(plans[0])}</div>
                     </th>
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && "31-" + plans[1].split("/")[0]}</div>
+                      <div>{plans && lastDayOfMonthDateFormat(plans[1])}</div>
                     </th>
                     <th scope="col" className="" style={{ minWidth: "70px", maxWidth: "70px" }}>
                       <div>Plan</div>
-                      <div>{plans && "31-" + plans[2].split("/")[0]}</div>
+                      <div>{plans && lastDayOfMonthDateFormat(plans[2])}</div>
                     </th>
 
                     <th scope="col" style={{ maxWidth: "60px" }}>

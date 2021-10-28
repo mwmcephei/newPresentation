@@ -22,12 +22,26 @@ const MeasureOverview = (): ReactElement => {
       .then(response => response.json())
       .then(response => {
         if (filter) {
-          const filteredMeasures = response.filter(m => {
-            //    if (m.kpiProgress === kpiStates.indexOf(filter)) {
-            if (getMax([m.artefact, m.budget, m.risk]) === overallStates.indexOf(filter)) {
-              return m
-            }
-          })
+          console.log(filter)
+          let filteredMeasures
+          if (kpiStates.includes(filter)) {
+            filteredMeasures = response.filter(m => {
+              //    if (m.kpiProgress === kpiStates.indexOf(filter)) {
+              if (m.kpiProgress === kpiStates.indexOf(filter)) {
+                return m
+              }
+            })
+          } else if (overallStates.includes(filter)) {
+            filteredMeasures = response.filter(m => {
+              //    if (m.kpiProgress === kpiStates.indexOf(filter)) {
+              if (getMax([m.artefact, m.budget, m.risk]) === overallStates.indexOf(filter)) {
+                return m
+              }
+            })
+          } else {
+            filteredMeasures = response
+          }
+
           setMeasures(filteredMeasures)
         } else {
           setMeasures(response)

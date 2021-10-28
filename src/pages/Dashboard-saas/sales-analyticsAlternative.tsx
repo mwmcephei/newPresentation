@@ -2,7 +2,7 @@ import React, { ReactElement } from "react"
 import { Row, Col, Card, CardBody } from "reactstrap"
 import ReactApexChart from "react-apexcharts"
 import { allianzBlue, standardGrey, structureNumberForDisplay } from "globalVars"
-
+import { useHistory } from "react-router-dom"
 
 type dashboardCircleDiagram_PropType = {
   title: String,
@@ -14,6 +14,8 @@ type dashboardCircleDiagram_PropType = {
 
 
 const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement => {
+  const history = useHistory()
+
   const series: number[] = [props.yellow, props.green]
   let toolTipLabels = props.labels
   const options = {
@@ -32,7 +34,8 @@ const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement =>
 
   return (
     <React.Fragment>
-      <Card style={{ height: "450px" }}>
+      <Card style={{ height: "450px", cursor: "pointer" }}
+        onClick={() => { history.push("/budget_reports/") }}>
         <CardBody className="d-flex flex-column justify-content-between">
           <h4 className="card-title mb-4">{props.title}</h4>
 

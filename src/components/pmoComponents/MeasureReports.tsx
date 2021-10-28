@@ -46,6 +46,8 @@ const MeasureReports = (props): ReactElement => {
     fetch(apiUrl + "/measures")
       .then(response => response.json())
       .then(response => {
+        console.log("measures")
+        console.log(response)
         setMeasures(response)
         if (measureID) {
           response.map(m => {
@@ -65,6 +67,8 @@ const MeasureReports = (props): ReactElement => {
     fetch(apiUrl + "/overview")
       .then(response => response.json())
       .then(response => {
+        console.log("overview")
+        console.log(response)
         setStatusDate(response.statusDate)
         setBudgetDate(response.budgetDate)
         setKPIDate(formatKPIDate(response.kpiDates[1]))
@@ -96,19 +100,12 @@ const MeasureReports = (props): ReactElement => {
 
   let team = <div></div>
   if (currentMeasure) {
-    if (currentMeasure.title === "M300") {
-      team = <TeamMembersNew lead={currentMeasure.measureLead}
-        measureSponsor={currentMeasure.measureSponsor}
-        lineOrgSponsor={currentMeasure.lineOrgSponsor}
-        solutionManager={currentMeasure.solutionManager}
-      />
-    } else {
-      team = <TeamMembers lead={currentMeasure.measureLead}
-        measureSponsor={currentMeasure.measureSponsor}
-        lineOrgSponsor={currentMeasure.lineOrgSponsor}
-        solutionManager={currentMeasure.solutionManager}
-      />
-    }
+    team = <TeamMembersNew lead={currentMeasure.measureLead}
+      measureSponsor={currentMeasure.measureSponsor}
+      lineOrgSponsor={currentMeasure.lineOrgSponsor}
+      solutionManager={currentMeasure.solutionManager}
+      pmo={false}
+    />
   }
 
 
@@ -156,6 +153,7 @@ const MeasureReports = (props): ReactElement => {
                   {team}
                 </Col>
               </Row>
+
               <Row>
                 <Col xs="12" xm="6" lg="6" xl="6" >
                   {measureReportStatus}
@@ -188,7 +186,7 @@ const MeasureReports = (props): ReactElement => {
                 <Container >
                   <Card>
                     <CardBody>
-                      <CardTitle className="mb-4">Risks</CardTitle>
+                      <CardTitle className="mb-4">Risks {currentMeasure.lastUpdate.split(" ")[2]}</CardTitle>
                       {risks}
                     </CardBody>
                   </Card>

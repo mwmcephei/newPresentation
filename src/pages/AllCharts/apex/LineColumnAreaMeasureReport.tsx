@@ -141,7 +141,7 @@ const LineColumnArea = ({ measure }): ReactElement => {
 
   return (
     <div>
-      {budgetChart}
+      {measure && budgetChart}
     </div>
   )
 }

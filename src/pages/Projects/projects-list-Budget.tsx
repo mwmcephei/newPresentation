@@ -11,7 +11,7 @@ import {
   Table,
 } from "reactstrap"
 // @ts-ignore
-import { getMax, getColors, focusAreaColors } from "../../globalVars"
+import { getMax, getColors, focusAreaColors, structureNumberForDisplay } from "../../globalVars"
 import { PieChart, Pie, Cell } from 'recharts';
 import ProgressChart from "./ProgressChart"
 import { Measure } from "../../types"
@@ -101,10 +101,10 @@ const ProjectsList = (props) => {
 
                     <div className="m-1">
                       <div>
-                        {measure.approved.toFixed(0)} kEUR
+                        {measure.approved > 1000 ? structureNumberForDisplay(measure.approved, false) : measure.approved.toFixed(0)} kEUR
                               </div>
                       <div>
-                        {(measure.budgetDetail.spentBudget / 1000).toFixed(0)} kEUR
+                        {measure.budgetDetail.spentBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.spentBudget, true) : (measure.budgetDetail.spentBudget / 1000).toFixed(0)} kEUR
                               </div>
                     </div>
 
@@ -139,10 +139,10 @@ const ProjectsList = (props) => {
 
                   <div className="mx-1 my-3 d-flex flex-column align-items-start ">
                     <div>
-                      <span>{(measure.budgetDetail.contractBudget / 1000).toFixed(2)} kEUR</span>
+                      <span>{measure.budgetDetail.contractBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.contractBudget, true) : (measure.budgetDetail.contractBudget / 1000).toFixed(2)} kEUR</span>
                     </div>
                     <div>
-                      <span>{(measure.budgetDetail.invoicedBudget / 1000).toFixed(2)} kEUR</span>
+                      <span>{measure.budgetDetail.invoicedBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.invoicedBudget, true) : (measure.budgetDetail.invoicedBudget / 1000).toFixed(2)} kEUR</span>
                     </div>
                   </div>
 

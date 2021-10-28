@@ -28,7 +28,7 @@ const TeamMembersNew = (props: Team): ReactElement => {
   return (
 
 
-    <Card style={{ height: "380px" }}>
+    <Card style={{ height: "400px" }}>
       <CardBody>
         <CardTitle className="mb-4">Team</CardTitle>
 
@@ -56,10 +56,10 @@ const TeamMembersNew = (props: Team): ReactElement => {
                         }}
                       >
                         <div>
-                          {divideName(props.lead).firstName}
+                          {divideName(props.lead.split("-")[0]).firstName}
                         </div>
                         <div>
-                          {divideName(props.lead).lastName}
+                          {divideName(props.lead.split("-")[0]).lastName}
                         </div>
                       </div>
                       <Popover
@@ -73,14 +73,20 @@ const TeamMembersNew = (props: Team): ReactElement => {
                           setTeam4PopOver(false)
                         }}
                       >
-                        <PopoverHeader>{props.lead}</PopoverHeader>
+                        <PopoverHeader>{props.lead.split("-")[0]}</PopoverHeader>
                         <PopoverBody >
-                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}>
+                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}
+                            href={
+                              props.pmo ? "tel:+491718626630"
+                                :
+                                "tel:+49" + props.lead.split("-")[1].substring(1, props.lead.split("-")[1].length)
+                            }
+                          >
                             <Icon icon="lucide:phone-call" style={{ fontSize: "20px" }} />
-                            <span className="m-2"  > 0171 34778112</span>
+                            <span className="m-2"  > {props.pmo ? "0171 8626630" : props.lead.split("-")[1]}</span>
                           </a>
                         </PopoverBody>
-                      </Popover>{" "}
+                      </Popover>
                     </div>
                   </h5>
                 </td>
@@ -91,8 +97,8 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       className="badge  bg-soft  font-size-11 me-1"
                       style={{ background: "#435fe3", color: "white" }}
                     >
-                      Measure Lead
-                        </Link>
+                      {props.pmo ? "PMO / Head" : "Measure Lead"}
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -116,10 +122,10 @@ const TeamMembersNew = (props: Team): ReactElement => {
                         }}
                       >
                         <div>
-                          {divideName(props.measureSponsor).firstName}
+                          {divideName(props.measureSponsor.split("-")[0]).firstName}
                         </div>
                         <div>
-                          {divideName(props.measureSponsor).lastName}
+                          {divideName(props.measureSponsor.split("-")[0]).lastName}
                         </div>
                       </div>
                       <Popover
@@ -133,14 +139,18 @@ const TeamMembersNew = (props: Team): ReactElement => {
                           setTeam4PopOver(false)
                         }}
                       >
-                        <PopoverHeader>{props.measureSponsor}</PopoverHeader>
+                        <PopoverHeader>{props.measureSponsor.split("-")[0]}</PopoverHeader>
                         <PopoverBody >
-                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}>
+                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}
+                            href={
+                              props.pmo ? "tel:+491721368256"
+                                :
+                                "tel:+49" + props.measureSponsor.split("-")[1].substring(1, props.measureSponsor.split("-")[1].length)}>
                             <Icon icon="lucide:phone-call" style={{ fontSize: "20px" }} />
-                            <span className="m-2"  > 0171 34778112</span>
+                            <span className="m-2"  > {props.pmo ? "0172 1368256" : props.measureSponsor.split("-")[1]}</span>
                           </a>
                         </PopoverBody>
-                      </Popover>{" "}
+                      </Popover>
                     </div>
                   </h5>
                 </td>
@@ -151,8 +161,8 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       className="badge  bg-soft  font-size-11 me-1"
                       style={{ background: "#435fe3", color: "white" }}
                     >
-                      Measure Lead
-                        </Link>
+                      {props.pmo ? "PMO / Budget" : "Measure Lead"}
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -183,7 +193,7 @@ const TeamMembersNew = (props: Team): ReactElement => {
                           {divideName(props.lineOrgSponsor).lastName}
                         </div>
                       </div>
-                      <Popover
+                      {props.pmo && <Popover
                         placement="bottom"
                         isOpen={team3PopOver}
                         target="Popover3"
@@ -196,12 +206,13 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       >
                         <PopoverHeader>{props.lineOrgSponsor}</PopoverHeader>
                         <PopoverBody >
-                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}>
+                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}
+                            href="tel:+491771628540">
                             <Icon icon="lucide:phone-call" style={{ fontSize: "20px" }} />
                             <span className="m-2"  > 0171 34778112</span>
                           </a>
                         </PopoverBody>
-                      </Popover>{" "}
+                      </Popover>}
                     </div>
                   </h5>
                 </td>
@@ -212,8 +223,8 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       className="badge  bg-soft  font-size-11 me-1"
                       style={{ background: "#435fe3", color: "white" }}
                     >
-                      Line Organization Sponsor
-                        </Link>
+                      {props.pmo ? "PMO / Progress" : "Line Organization Sponsor"}
+                    </Link>
                   </div>
                 </td>
               </tr>
@@ -242,7 +253,7 @@ const TeamMembersNew = (props: Team): ReactElement => {
                           {divideName(props.solutionManager).lastName}
                         </div>
                       </div>
-                      <Popover
+                      {props.pmo && <Popover
                         placement="bottom"
                         isOpen={team4PopOver}
                         target="Popover4"
@@ -255,12 +266,13 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       >
                         <PopoverHeader>{props.solutionManager}</PopoverHeader>
                         <PopoverBody >
-                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}>
+                          <a className="d-flex align-items-center" style={{ fontSize: "15px", color: "black" }}
+                            href="tel:+4915253928484">
                             <Icon icon="lucide:phone-call" style={{ fontSize: "20px" }} />
-                            <span className="m-2"  > 0171 34778112</span>
+                            <span className="m-2"  > 0152 53928484</span>
                           </a>
                         </PopoverBody>
-                      </Popover>{" "}
+                      </Popover>}
                     </div>
                   </h5>
                 </td>
@@ -271,8 +283,8 @@ const TeamMembersNew = (props: Team): ReactElement => {
                       className="badge  bg-soft  font-size-11 me-1"
                       style={{ background: "#435fe3", color: "white" }}
                     >
-                      Solution Manager
-                        </Link>
+                      {props.pmo ? "PMO / Progress" : "Solution Manager"}
+                    </Link>
                   </div>
                 </td>
               </tr>

@@ -37,11 +37,11 @@ const Navbar = props => {
                 <li className="nav-item">
                   <Link to="/dashboard" className="dropdown-item">
                     <div className="d-flex justify-content-left">
-                      <h5 className="" style={iconStyle}>
-                        <i className="mdi mdi-developer-board"></i>
+                      <h5 className="mt-1" style={iconStyle}>
+                        <i className="mdi mdi-developer-board mt-1 p-0"></i>
                       </h5>
                       <div style={navbarItemStyle}>
-                        <h5 className=" ">Dashboard</h5>
+                        <h5 className="mt-1 ">Dashboard</h5>
                       </div>
                     </div>
                   </Link>
@@ -50,12 +50,12 @@ const Navbar = props => {
                 <li className="nav-item ">
                   <Link to="/measure_overview" className="dropdown-item">
                     <div className="d-flex justify-content-left">
-                      <h5 className="" style={iconStyle}>
-                        <i className="mdi mdi-clipboard-list-outline"></i>
+                      <h5 className="mt-1" style={iconStyle}>
+                        <i className="mdi mdi-clipboard-list-outline mt-1"></i>
                       </h5>
 
                       <div style={navbarItemStyle}>
-                        <h5 className="">Measure Overview</h5>
+                        <h5 className="mt-1">Measure Overview</h5>
                       </div>
                     </div>
                   </Link>
@@ -65,11 +65,11 @@ const Navbar = props => {
                   <Link to="/measureReports" className="dropdown-item">
                     <div className="d-flex justify-content-left">
                       <h5 className="" style={iconStyle}>
-                        <i className="bx bx-file "></i>
+                        <i className="bx bx-file mt-1"></i>
                       </h5>
 
                       <div style={navbarItemStyle}>
-                        <h5 className="">Measure Reports</h5>
+                        <h5 className="mt-1">Measure Reports</h5>
                       </div>
                     </div>
                   </Link>
@@ -79,11 +79,11 @@ const Navbar = props => {
                   <Link to="/budget_reports" className="dropdown-item">
                     <div className="d-flex justify-content-left">
                       <h5 className="" style={iconStyle}>
-                        <i className="bx bx-bar-chart-alt-2 "></i>
+                        <i className="bx bx-bar-chart-alt-2  mt-1"></i>
                       </h5>
 
                       <div style={navbarItemStyle}>
-                        <h5 className="">Budget Report</h5>
+                        <h5 className=" mt-1">Budget Report</h5>
                       </div>
                     </div>
                   </Link>
@@ -93,10 +93,10 @@ const Navbar = props => {
                   <Link to="/overall_budget" className="dropdown-item">
                     <div className="d-flex justify-content-left">
                       <h5 className="" style={iconStyle}>
-                        <i className="bx bx-bar-chart-alt-2 "></i>
+                        <i className="bx bx-right-indent mt-1"></i>
                       </h5>
                       <div style={navbarItemStyle}>
-                        <h5 className="">All Measures</h5>
+                        <h5 className=" mt-1">All Measures</h5>
                       </div>
                     </div>
                   </Link>

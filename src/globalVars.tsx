@@ -1,9 +1,16 @@
 import { ReactElement } from "react"
 
-// export const apiUrl = "http://localhost:80/api"   // Docker: 80, regular: 4000
+// export const apiUrl = "http://localhost:4000/api"   // Docker: 80, regular: 4000
+// export const parseUrl = "http://localhost:4000/xlsx-parser"
 // export const loginURL = "http://localhost:4000/simpleauth/login"
-export const apiUrl = "https://backend-testdata.herokuapp.com/api"   // backend hosted on heroku
-export const loginURL = "https://backend-testdata.herokuapp.com/simpleauth/login"
+// export const apiUrl = "https://backend-testdata.herokuapp.com/api"   // backend hosted on heroku
+// export const parseUrl = "https://backend-testdata.herokuapp.com/xlsx-parser"
+// export const loginURL = "https://backend-testdata.herokuapp.com/simpleauth/login"
+
+export const apiUrl = "https://newdatapmo.herokuapp.com/api"
+export const parseUrl = "https://newdatapmo.herokuapp.com/xlsx-parser"
+export const loginURL = "https://newdatapmo.herokuapp.com/simpleauth/login"
+
 
 export const getMax = (array: number[]): number => {
   let res = 0
@@ -201,12 +208,19 @@ function isLetter(c) {
 }
 
 export const formatKPIDate = (rawDate) => {
-  const day = rawDate.split(".")[0]
-  const month = rawDate.split(".")[1]
-  const year = rawDate.split(".")[2].length < 4 ? "20" + rawDate.split(".")[2] : rawDate.split(".")[2]
-  return day + "." + month + "." + year
+  console.log("rawDate  " + rawDate)
+  if (rawDate) {
+    const day = rawDate.split(".")[0]
+    const month = rawDate.split(".")[1]
+    const year = rawDate.split(".")[2].length < 4 ? "20" + rawDate.split(".")[2] : rawDate.split(".")[2]
+    return day + "." + month + "." + year
+  } else {
+    return "test"
+  }
+
 }
 
 export const formatBudgetDate = (rawDate) => {
   return rawDate.split("-")[2] + "." + rawDate.split("-")[1] + "." + rawDate.split("-")[0]
 }
+

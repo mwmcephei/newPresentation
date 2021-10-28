@@ -15,14 +15,7 @@ import _ from "lodash"
 
 const ProjectsListPastBudget = (props) => {
 
-  const getUniqueYears = (): number[] => {
-    let allYears = []
-    props.pastBudgets.map(pb => {
-      allYears.push(pb.year)
-    })
-    console.log([...new Set(allYears)])
-    return [...new Set(allYears)]
-  }
+
 
 
   const filterBudgetsByYear = (year): PastBudget[] => {
@@ -41,12 +34,6 @@ const ProjectsListPastBudget = (props) => {
 
   return (
     <React.Fragment>
-
-      {props.pastBudgets && getUniqueYears().map(x => {
-        <div key={x + ""}>test {x}</div>
-      })}
-
-
       <div className="table-responsive">
         <Table className="project-list-table  align-middle " >
           <thead>
@@ -59,7 +46,7 @@ const ProjectsListPastBudget = (props) => {
           </thead>
 
 
-          {props.pastBudgets && map(getUniqueYears(), (year, index1) => (
+          {props.pastBudgets && map(props.uniqueYears, (year, index1) => (
 
 
             <tbody key={index1} className="">

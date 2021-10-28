@@ -131,8 +131,8 @@ function TapVisitors({ measureID, totalApprovedBudget, date1 }: TapVisitorsProps
                           >{shortenText(art.description, 50)}</div>
                         }
                         <div className=" " >
-                          {progressAsString(art.progress)}%
-                          </div>
+                          <b>{progressAsString(art.progress)}%</b>
+                        </div>
                       </div>
                       <div className="progress animated-progess progress-sm">
                         <div
