@@ -1,17 +1,23 @@
 {
   "files": {
     "main.css": "/newPresentation/static/css/main.abc8f76c.chunk.css",
-    "main.js": "/newPresentation/static/js/main.7dca4a14.chunk.js",
-    "main.js.map": "/newPresentation/static/js/main.7dca4a14.chunk.js.map",
-    "runtime-main.js": "/newPresentation/static/js/runtime-main.a9650a66.js",
-    "runtime-main.js.map": "/newPresentation/static/js/runtime-main.a9650a66.js.map",
+    "main.js": "/newPresentation/static/js/main.a716cec4.chunk.js",
+    "main.js.map": "/newPresentation/static/js/main.a716cec4.chunk.js.map",
+    "runtime-main.js": "/newPresentation/static/js/runtime-main.6ec14da6.js",
+    "runtime-main.js.map": "/newPresentation/static/js/runtime-main.6ec14da6.js.map",
     "static/css/2.f3add328.chunk.css": "/newPresentation/static/css/2.f3add328.chunk.css",
-    "static/js/2.d61e6921.chunk.js": "/newPresentation/static/js/2.d61e6921.chunk.js",
-    "static/js/2.d61e6921.chunk.js.map": "/newPresentation/static/js/2.d61e6921.chunk.js.map",
+    "static/js/2.acd909eb.chunk.js": "/newPresentation/static/js/2.acd909eb.chunk.js",
+    "static/js/2.acd909eb.chunk.js.map": "/newPresentation/static/js/2.acd909eb.chunk.js.map",
+    "static/js/3.86ff6699.chunk.js": "/newPresentation/static/js/3.86ff6699.chunk.js",
+    "static/js/3.86ff6699.chunk.js.map": "/newPresentation/static/js/3.86ff6699.chunk.js.map",
+    "static/js/4.94bf4cd3.chunk.js": "/newPresentation/static/js/4.94bf4cd3.chunk.js",
+    "static/js/4.94bf4cd3.chunk.js.map": "/newPresentation/static/js/4.94bf4cd3.chunk.js.map",
+    "static/js/5.70aa84bb.chunk.js": "/newPresentation/static/js/5.70aa84bb.chunk.js",
+    "static/js/5.70aa84bb.chunk.js.map": "/newPresentation/static/js/5.70aa84bb.chunk.js.map",
     "index.html": "/newPresentation/index.html",
     "static/css/2.f3add328.chunk.css.map": "/newPresentation/static/css/2.f3add328.chunk.css.map",
     "static/css/main.abc8f76c.chunk.css.map": "/newPresentation/static/css/main.abc8f76c.chunk.css.map",
-    "static/js/2.d61e6921.chunk.js.LICENSE.txt": "/newPresentation/static/js/2.d61e6921.chunk.js.LICENSE.txt",
+    "static/js/2.acd909eb.chunk.js.LICENSE.txt": "/newPresentation/static/js/2.acd909eb.chunk.js.LICENSE.txt",
     "static/media/allianz_bird_logo.eee76c11.png": "/newPresentation/static/media/allianz_bird_logo.eee76c11.png",
     "static/media/theme.scss": "/newPresentation/static/media/materialdesignicons-webfont.d06df622.woff",
     "static/media/coming-soon.58c6b560.svg": "/newPresentation/static/media/coming-soon.58c6b560.svg",
@@ -25,10 +31,10 @@
     "static/media/verification-img.4d646fae.png": "/newPresentation/static/media/verification-img.4d646fae.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a9650a66.js",
+    "static/js/runtime-main.6ec14da6.js",
     "static/css/2.f3add328.chunk.css",
-    "static/js/2.d61e6921.chunk.js",
+    "static/js/2.acd909eb.chunk.js",
     "static/css/main.abc8f76c.chunk.css",
-    "static/js/main.7dca4a14.chunk.js"
+    "static/js/main.a716cec4.chunk.js"
   ]
 }
