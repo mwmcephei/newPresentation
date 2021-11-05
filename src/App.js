@@ -105,10 +105,7 @@ const App = props => {
           <Index />
           <Switch>
             <Route path="/" exact>
-              <Login login={setLoggedIn} />
-            </Route>
-            <Route path="/newPresentation" >
-              <Login login={setLoggedIn} />
+              <Overview />
             </Route>
 
 
