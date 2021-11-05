@@ -1,61 +1,70 @@
-import React, { ReactElement, useEffect } from "react"
-import { Row, Col, Card, CardBody } from "reactstrap"
-import ReactApexChart from "react-apexcharts"
-import { allianzBlue, getMax, standardGreen, standardGrey, standardRed, standardYellow } from "globalVars"
-import { useHistory } from "react-router-dom"
+import React, { ReactElement, useEffect } from 'react';
+import { Row, Col, Card, CardBody } from 'reactstrap';
+import ReactApexChart from 'react-apexcharts';
+import {
+  allianzBlue,
+  getMax,
+  standardGreen,
+  standardGrey,
+  standardRed,
+  standardYellow,
+} from 'globalVars';
+import { useHistory } from 'react-router-dom';
+import { DashboardCircleDiagram_PropType } from 'types';
 
-type dashboardCircleDiagram_PropType = {
-  title: String,
-  green: number,
-  yellow: number,
-  red: number,
-  labels: string[],
-  isKPIChart: boolean,
-  date: string | ""
-}
+const SalesAnalytics = (
+  props: DashboardCircleDiagram_PropType,
+): ReactElement => {
+  const history = useHistory();
 
-
-const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement => {
-  const history = useHistory()
-
-
-  const series: number[] = [props.yellow, props.green, props.red]
-  let toolTipLabels = props.labels
-  if (props.labels[0] === "Status ") {
-    toolTipLabels = ["yellow", "green", "red"]
+  const series: number[] = [props.yellow, props.green, props.red];
+  let toolTipLabels = props.labels;
+  if (props.labels[0] === 'Status ') {
+    toolTipLabels = ['yellow', 'green', 'red'];
   }
   const options = {
-    labels: props.isKPIChart ? [props.labels[1], props.labels[2], props.labels[0],] : toolTipLabels,
-    colors: (props.isKPIChart ? [allianzBlue, standardGreen, standardYellow] : [standardYellow, standardGreen, standardRed]),
-
+    labels: props.isKPIChart
+      ? [props.labels[1], props.labels[2], props.labels[0]]
+      : toolTipLabels,
+    colors: props.isKPIChart
+      ? [allianzBlue, standardGreen, standardYellow]
+      : [standardYellow, standardGreen, standardRed],
 
     chart: {
       events: {
         dataPointSelection: (event, chartContext, config) => {
           if (props.isKPIChart) {
-            history.push("/measure_overview/" + config.w.config.labels[config.dataPointIndex])
+            history.push(
+              '/measure_overview/' +
+                config.w.config.labels[config.dataPointIndex],
+            );
           } else {
-            history.push("/measure_overview/" + config.w.config.labels[config.dataPointIndex])
+            history.push(
+              '/measure_overview/' +
+                config.w.config.labels[config.dataPointIndex],
+            );
           }
-        }
-      }
+        },
+      },
     },
 
     legend: { show: !1 },
     plotOptions: {
       pie: {
         donut: {
-          size: "70%",
+          size: '70%',
         },
       },
     },
-  }
+  };
 
   return (
     <React.Fragment>
       <Card>
         <CardBody>
-          <h4 className="card-title mb-4">{props.title} {props.date}</h4>
+          <h4 className="card-title mb-4">
+            {props.title} {props.date}
+          </h4>
 
           <div>
             <div id="donut-chart">
@@ -75,11 +84,17 @@ const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement =>
                 <div className="mt-4">
                   <span className="mb-2 ">
                     <span>{props.labels[0]}</span>
-                    {props.isKPIChart ?
-                      <i className="mdi mdi-circle  me-1" style={{ color: standardYellow }} />
-                      :
-                      <i className="mdi mdi-circle  me-1" style={{ color: standardRed }} />
-                    }
+                    {props.isKPIChart ? (
+                      <i
+                        className="mdi mdi-circle  me-1"
+                        style={{ color: standardYellow }}
+                      />
+                    ) : (
+                      <i
+                        className="mdi mdi-circle  me-1"
+                        style={{ color: standardRed }}
+                      />
+                    )}
                   </span>
                   <h5 className="mt-2">{props.red}</h5>
                 </div>
@@ -88,12 +103,17 @@ const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement =>
                 <div className="mt-4">
                   <span className="mb-2 text-truncate">
                     <span>{props.labels[1]}</span>
-                    {props.isKPIChart ?
-                      <i className="mdi mdi-circle  me-1" style={{ color: allianzBlue }} />
-                      :
-                      <i className="mdi mdi-circle  me-1" style={{ color: standardYellow }} />
-                    }
-
+                    {props.isKPIChart ? (
+                      <i
+                        className="mdi mdi-circle  me-1"
+                        style={{ color: allianzBlue }}
+                      />
+                    ) : (
+                      <i
+                        className="mdi mdi-circle  me-1"
+                        style={{ color: standardYellow }}
+                      />
+                    )}
                   </span>
                   <h5 className="mt-2">{props.yellow}</h5>
                 </div>
@@ -102,7 +122,10 @@ const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement =>
                 <div className="mt-4">
                   <span className="mb-2 text-truncate">
                     <span>{props.labels[2]}</span>
-                    <i className="mdi mdi-circle  me-1" style={{ color: standardGreen }} />
+                    <i
+                      className="mdi mdi-circle  me-1"
+                      style={{ color: standardGreen }}
+                    />
                   </span>
                   <h5 className="mt-2">{props.green}</h5>
                 </div>
@@ -112,7 +135,7 @@ const SalesAnalytics = (props: dashboardCircleDiagram_PropType): ReactElement =>
         </CardBody>
       </Card>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default SalesAnalytics
+export default SalesAnalytics;

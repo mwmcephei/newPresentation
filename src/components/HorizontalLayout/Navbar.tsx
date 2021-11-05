@@ -1,24 +1,22 @@
-import PropTypes from "prop-types"
-import React, { useState, useEffect } from "react"
-import { Row, Col, Collapse } from "reactstrap"
-import { Link, withRouter } from "react-router-dom"
-import classname from "classnames"
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { Row, Col, Collapse } from 'reactstrap';
+import { Link, withRouter } from 'react-router-dom';
+import classname from 'classnames';
 
 //i18n
-import { withTranslation } from "react-i18next"
+import { withTranslation } from 'react-i18next';
 
-import { connect } from "react-redux"
+import { connect } from 'react-redux';
 
-
-
-const navbarItemStyle = { marginLeft: "20px" }
+const navbarItemStyle = { marginLeft: '20px' };
 const iconStyle = {
-  backgroundSize: "20px",
-  width: "20px",
-}
+  backgroundSize: '20px',
+  width: '20px',
+};
 
 const Navbar = props => {
-  const [activeTab, setActiveTab] = useState("dashboard")
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   return (
     <React.Fragment>
@@ -107,24 +105,21 @@ const Navbar = props => {
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Navbar.propTypes = {
   leftMenu: PropTypes.any,
   location: PropTypes.any,
   menuOpen: PropTypes.any,
   t: PropTypes.any,
-}
+};
 
 const mapStatetoProps = state => {
-  const { leftMenu } = state.Layout
-  return { leftMenu }
-}
+  const { leftMenu } = state.Layout;
+  return { leftMenu };
+};
 
 export default withRouter(
-  connect(mapStatetoProps, {})(withTranslation()(Navbar))
-)
-
-
-
+  connect(mapStatetoProps, {})(withTranslation()(Navbar)),
+);

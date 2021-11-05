@@ -1,58 +1,48 @@
-import React, { useEffect, useState } from "react"
-import { withRouter, useHistory } from "react-router-dom"
-import { map } from "lodash"
+import React, { useEffect, useState } from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
+import { map } from 'lodash';
+import { Badge, Col, Row, Table } from 'reactstrap';
 import {
-  Badge,
-  Col,
-  Row,
-  Table,
-} from "reactstrap"
-import { getMax, getColors, focusAreaColors, structureNumberForDisplay } from "../../globalVars"
+  getMax,
+  getColors,
+  focusAreaColors,
+  structureNumberForDisplay,
+  getShortenedName,
+} from '../../globalVars';
 import { PieChart, Pie, Cell } from 'recharts';
-import ProgressChart from "./ProgressChart"
-import { Measure } from "../../types"
-
-
+import ProgressChart from './ProgressChart';
+import { Measure } from '../../types';
 
 const ProjectsList = (props: { measures: Measure[] }) => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const getDoughnutData = (bigger, smaller) => {
+  const getDoughnutData = (bigger: number, smaller: number) => {
     return [
       { name: 'a', value: bigger - smaller },
       { name: 'b', value: smaller },
     ];
-  }
-
-  const getShortenedName = (name: string, maxChars: number) => {
-    if (name.length > maxChars) {
-      return name.substring(0, maxChars) + "..."
-    } else {
-      return name
-    }
-  }
+  };
 
   function handleMeasureClick(measureID) {
-    history.push("/measureReports/" + measureID)
+    history.push('/measureReports/' + measureID);
   }
 
-  const checkLength = (name: string): string => {
+  const formatName = (name: string): string => {
     if (name.length > 20) {
-      const split = name.split(" ")
+      const split = name.split(' ');
       if (split[0].length > 3) {
-        const rest = split.slice(1, split.length)
-        return split[0].substring(0, 1) + ". " + rest.join(" ")
+        const rest = split.slice(1, split.length);
+        return split[0].substring(0, 1) + '. ' + rest.join(' ');
       } else {
-        const rest = split.slice(2, split.length)
-        return split[0] + " " + split[1].substring(0, 1) + ". " + rest.join(" ")
+        const rest = split.slice(2, split.length);
+        return (
+          split[0] + ' ' + split[1].substring(0, 1) + '. ' + rest.join(' ')
+        );
       }
-
     } else {
-      return name
+      return name;
     }
-  }
-
-
+  };
 
   return (
     <React.Fragment>
@@ -60,13 +50,15 @@ const ProjectsList = (props: { measures: Measure[] }) => {
         <Col lg="12">
           <div className="">
             <div className="table-responsive">
-              <Table className="project-list-table  align-middle table-borderless" >
+              <Table className="project-list-table  align-middle table-borderless">
                 <thead>
                   <tr>
-                    <th scope="col" >#</th>
-                    <th scope="col" style={{ width: "100px" }}>Focus Area</th>
-                    <th scope="col" >Measure Name</th>
-                    <th scope="col" >Measure Team</th>
+                    <th scope="col">#</th>
+                    <th scope="col" style={{ width: '100px' }}>
+                      Focus Area
+                    </th>
+                    <th scope="col">Measure Name</th>
+                    <th scope="col">Measure Team</th>
                     <th scope="col">Measure Progress</th>
                     <th scope="col">KPI Name</th>
                     <th scope="col">KPI Progress</th>
@@ -74,25 +66,36 @@ const ProjectsList = (props: { measures: Measure[] }) => {
                   </tr>
                 </thead>
 
-
                 <tbody>
                   {map(props.measures, (measure, index) => (
-                    <tr key={index} onClick={() => handleMeasureClick(measure._id)}>
+                    <tr
+                      key={index}
+                      onClick={() => handleMeasureClick(measure._id)}
+                    >
+                      <td>{measure.id}</td>
 
                       <td>
-                        {measure.id}
-                      </td>
-
-                      <td>
-                        <div className="d-flex justify-content-center text-center align-items-center
+                        <div
+                          className="d-flex justify-content-center text-center align-items-center
                           rounded-circle 
                           text-truncate"
-                          style={{ height: '40px', width: '40px', background: focusAreaColors[measure.focusArea] }} >
+                          style={{
+                            height: '40px',
+                            width: '40px',
+                            background: focusAreaColors[measure.focusArea],
+                          }}
+                        >
                           <b>{measure.focusArea}</b>
                         </div>
                       </td>
 
-                      <td style={{ wordWrap: "break-word", maxWidth: "300px", minWidth: "200px" }}>
+                      <td
+                        style={{
+                          wordWrap: 'break-word',
+                          maxWidth: '300px',
+                          minWidth: '200px',
+                        }}
+                      >
                         <div>
                           <b>{measure.title}</b>
                         </div>
@@ -104,103 +107,204 @@ const ProjectsList = (props: { measures: Measure[] }) => {
                         </div>
                       </td>
 
-
-
-
                       <td className="p-2 text-nowrap " style={{}}>
-                        <div className="d-flex flex-row align-items-center  " >
-                          <div className="p-0 m-0 d-flex flex-column" style={{ minWidth: "180px", maxWidth: "200px" }}>
+                        <div className="d-flex flex-row align-items-center  ">
+                          <div
+                            className="p-0 m-0 d-flex flex-column"
+                            style={{ minWidth: '180px', maxWidth: '200px' }}
+                          >
                             <div>
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> ML: {checkLength(measure.measureLead.split("-")[0])}
+                              <i
+                                className="bx bx-user "
+                                style={{ fontSize: '15px', marginRight: '2px' }}
+                              ></i>{' '}
+                              ML:{' '}
+                              {formatName(measure.measureLead.split('-')[0])}
                             </div>
                             <div>
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i> MS: {checkLength(measure.measureSponsor.split("-")[0])}
+                              <i
+                                className="bx bx-user "
+                                style={{ fontSize: '15px', marginRight: '2px' }}
+                              ></i>{' '}
+                              MS:{' '}
+                              {formatName(measure.measureSponsor.split('-')[0])}
                             </div>
                           </div>
                           <div className="d-none d-xl-block  d-flex flex-column m-2">
                             <div className="d-flex align-items-center">
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i><span> LM: {checkLength(measure.lineOrgSponsor)}</span>
+                              <i
+                                className="bx bx-user "
+                                style={{ fontSize: '15px', marginRight: '2px' }}
+                              ></i>
+                              <span>
+                                {' '}
+                                LM: {formatName(measure.lineOrgSponsor)}
+                              </span>
                             </div>
                             <div className="d-flex align-items-center">
-                              <i className="bx bx-user " style={{ fontSize: "15px", marginRight: "2px" }}></i><span> SM: {checkLength(measure.solutionManager)}</span>
+                              <i
+                                className="bx bx-user "
+                                style={{ fontSize: '15px', marginRight: '2px' }}
+                              ></i>
+                              <span>
+                                {' '}
+                                SM: {formatName(measure.solutionManager)}
+                              </span>
                             </div>
                           </div>
                         </div>
                       </td>
 
-                      <td className=" pl-4" style={{ wordWrap: "break-word", maxWidth: "200px", minWidth: "150px" }}>
+                      <td
+                        className=" pl-4"
+                        style={{
+                          wordWrap: 'break-word',
+                          maxWidth: '200px',
+                          minWidth: '150px',
+                        }}
+                      >
                         <Row className="d-flex align-items-center">
-                          <Col className="d-flex   " xs="6" xm="6" lg="6" xl="6">
+                          <Col
+                            className="d-flex   "
+                            xs="6"
+                            xm="6"
+                            lg="6"
+                            xl="6"
+                          >
                             Status:
-                            </Col>
+                          </Col>
                           <Col>
-                            <PieChart width={30} height={30} >
-                              <Pie data={[{ name: 'Geeksforgeeks', students: 400 },]}
-                                dataKey="students" outerRadius={10}
-                                fill={getColors(getMax([measure.risk, measure.artefact, measure.budget]))[1]}
+                            <PieChart width={30} height={30}>
+                              <Pie
+                                data={[
+                                  { name: 'Geeksforgeeks', students: 400 },
+                                ]}
+                                dataKey="students"
+                                outerRadius={10}
+                                fill={
+                                  getColors(
+                                    getMax([
+                                      measure.risk,
+                                      measure.artefact,
+                                      measure.budget,
+                                    ]),
+                                  )[1]
+                                }
                                 stroke="none"
-                                isAnimationActive={false} />
+                                isAnimationActive={false}
+                              />
                             </PieChart>
                           </Col>
                         </Row>
                         <Row className="d-flex align-items-center ">
                           <Col className="d-flex  " xs="6" xm="6" lg="6" xl="6">
-
                             Progress:
-                            </Col>
+                          </Col>
                           <Col>
-                            <ProgressChart measure={measure} colors={getColors(getMax([measure.risk, measure.artefact, measure.budget]))} />
+                            <ProgressChart
+                              measure={measure}
+                              colors={getColors(
+                                getMax([
+                                  measure.risk,
+                                  measure.artefact,
+                                  measure.budget,
+                                ]),
+                              )}
+                            />
                           </Col>
                         </Row>
                       </td>
 
-                      <td style={{ wordWrap: "break-word", maxWidth: "300px", minWidth: "200px" }}>
+                      <td
+                        style={{
+                          wordWrap: 'break-word',
+                          maxWidth: '300px',
+                          minWidth: '200px',
+                        }}
+                      >
                         {getShortenedName(measure.kpiName, 50)}
                       </td>
 
                       <td>
-                        <Badge className="p-2" style={{ background: "#97d48a", fontSize: "12px", width: "80px" }}>
-                          <b>{measure.kpiData.actuals} / {measure.kpiData.target}</b>
+                        <Badge
+                          className="p-2"
+                          style={{
+                            background: '#97d48a',
+                            fontSize: '12px',
+                            width: '80px',
+                          }}
+                        >
+                          <b>
+                            {measure.kpiData.actuals} / {measure.kpiData.target}
+                          </b>
                         </Badge>
                       </td>
 
-                      <td style={{ wordWrap: "break-word", maxWidth: "250px", minWidth: "250px" }}>
+                      <td
+                        style={{
+                          wordWrap: 'break-word',
+                          maxWidth: '250px',
+                          minWidth: '250px',
+                        }}
+                      >
                         <div className="d-flex justify-content-between align-items-center">
                           <div className="">
-                            <div>
-                              Approved:
-                              </div>
-                            <div>
-                              Spent:
-                              </div>
+                            <div>Approved:</div>
+                            <div>Spent:</div>
                           </div>
 
                           <div className="m-1">
                             <div>
-                              {structureNumberForDisplay(measure.approved * 1000, true)} kEUR
-                              </div>
+                              {structureNumberForDisplay(
+                                measure.approved * 1000,
+                                true,
+                              )}{' '}
+                              kEUR
+                            </div>
                             <div>
-                              {structureNumberForDisplay(measure.budgetDetail.spentBudget, true)} kEUR
-                              </div>
+                              {structureNumberForDisplay(
+                                measure.budgetDetail.spentBudget,
+                                true,
+                              )}{' '}
+                              kEUR
+                            </div>
                           </div>
 
-                          <PieChart width={50} height={50} style={{ transform: "rotate(270deg)" }}>
-                            <Pie data={getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000))}
-                              dataKey="value" outerRadius={20} innerRadius={0}
+                          <PieChart
+                            width={50}
+                            height={50}
+                            style={{ transform: 'rotate(270deg)' }}
+                          >
+                            <Pie
+                              data={getDoughnutData(
+                                measure.approved,
+                                measure.budgetDetail.spentBudget / 1000,
+                              )}
+                              dataKey="value"
+                              outerRadius={20}
+                              innerRadius={0}
                               isAnimationActive={false}
                             >
-                              {getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000)).map((
-                                // @ts-ignore
-                                entry, index) => (
-                                // @ts-ignore
-                                <Cell key={`cell-${index}`} fill={getColors(-1)[index % 2]} />
-                              ))}
+                              {getDoughnutData(
+                                measure.approved,
+                                measure.budgetDetail.spentBudget / 1000,
+                              ).map(
+                                (
+                                  // @ts-ignore
+                                  entry,
+                                  index,
+                                ) => (
+                                  // @ts-ignore
+                                  <Cell
+                                    key={`cell-${index}`}
+                                    fill={getColors(-1)[index % 2]}
+                                  />
+                                ),
+                              )}
                             </Pie>
                           </PieChart>
                         </div>
-
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
@@ -209,12 +313,8 @@ const ProjectsList = (props: { measures: Measure[] }) => {
           </div>
         </Col>
       </Row>
-    </React.Fragment >
-  )
-}
+    </React.Fragment>
+  );
+};
 
-export default withRouter(ProjectsList)
-
-
-
-
+export default withRouter(ProjectsList);

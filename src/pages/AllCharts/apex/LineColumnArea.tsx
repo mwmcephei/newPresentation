@@ -1,70 +1,73 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
-import ReactApexChart from "react-apexcharts"
-import { ApexOptions } from 'apexcharts'
-import "./LineColumnArea.css"
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import './LineColumnArea.css';
 
 type LineColumnAreaProps = {
-  labels: string[],
-  monthlySpendings: number[],
-  approved: number,
-}
+  labels: string[];
+  monthlySpendings: number[];
+  approved: number;
+};
 
-
-
-
-const LineColumnArea = ({ labels, monthlySpendings, approved }: LineColumnAreaProps): ReactElement => {
-  const [approvedArray, setApproved] = useState<number[]>([])
-  const [accumulatedSpendings, setAccumulatedSpendings] = useState<number[]>([])
+const LineColumnArea = ({
+  labels,
+  monthlySpendings,
+  approved,
+}: LineColumnAreaProps): ReactElement => {
+  const [approvedArray, setApproved] = useState<number[]>([]);
+  const [accumulatedSpendings, setAccumulatedSpendings] = useState<number[]>(
+    [],
+  );
 
   useEffect(() => {
-    if (typeof labels != 'undefined' && labels &&
-      typeof monthlySpendings != 'undefined' && monthlySpendings &&
-      typeof approved != 'undefined' && approved) {
-
+    if (
+      typeof labels != 'undefined' &&
+      labels &&
+      typeof monthlySpendings != 'undefined' &&
+      monthlySpendings &&
+      typeof approved != 'undefined' &&
+      approved
+    ) {
       const a = monthlySpendings.map(a => {
-        return approved
-      })
-      setApproved(a)
+        return approved;
+      });
+      setApproved(a);
 
-      const acumulateSpendingsAray = acumulateArray(monthlySpendings)
-      setAccumulatedSpendings(acumulateSpendingsAray)
-    } else {
-      console.log("NO PROPS")
+      const acumulateSpendingsAray = acumulateArray(monthlySpendings);
+      setAccumulatedSpendings(acumulateSpendingsAray);
     }
   }, []);
 
-
   const acumulateArray = (array: number[]): number[] => {
-    let result = []
+    let result = [];
     for (let i = 0; i < array.length; i++) {
-      let acc = 0
+      let acc = 0;
       for (let j = 0; j <= i; j++) {
-        acc += array[j]
+        acc += array[j];
       }
-      result.push(acc)
+      result.push(acc);
     }
-    return result
-  }
+    return result;
+  };
 
   const series = [
     {
-      name: "Accumulated Monthly Spendings",
-      type: "area",
+      name: 'Accumulated Monthly Spendings',
+      type: 'area',
       data: accumulatedSpendings ? accumulatedSpendings : [],
     },
     {
-      name: "Monthly Spendings",
-      type: "column",
+      name: 'Monthly Spendings',
+      type: 'column',
       data: monthlySpendings ? monthlySpendings : [],
     },
     {
-      name: "Monthly Average Approved",
-      type: "line",
+      name: 'Monthly Average Approved',
+      type: 'line',
       data: approvedArray ? approvedArray : [],
     },
-  ]
-
+  ];
 
   const options: ApexOptions = {
     chart: {
@@ -75,24 +78,24 @@ const LineColumnArea = ({ labels, monthlySpendings, approved }: LineColumnAreaPr
     },
     stroke: {
       width: [0, 2, 4],
-      curve: "smooth",
+      curve: 'smooth',
     },
     plotOptions: {
       bar: {
-        columnWidth: "50%",
+        columnWidth: '50%',
       },
     },
     colors: [
-      "#556ee6",
-      "#f46a6a", // red
-      "#34c38f",
+      '#556ee6',
+      '#f46a6a', // red
+      '#34c38f',
     ],
     fill: {
       opacity: [0.25, 1, 1], // [0.85, 0.25, 1],
       gradient: {
         inverseColors: false,
-        shade: "light",
-        type: "vertical",
+        shade: 'light',
+        type: 'vertical',
         opacityFrom: 0.85,
         opacityTo: 0.55,
         stops: [0, 100, 100, 100],
@@ -106,15 +109,17 @@ const LineColumnArea = ({ labels, monthlySpendings, approved }: LineColumnAreaPr
       offsetY: 11,
     },
     xaxis: {
-      type: "datetime",
+      categories: labels,
     },
     yaxis: {
       title: {
-        text: "Spent €",
+        text: 'Spent €',
       },
       labels: {
         show: true,
-        formatter: (value) => { return Math.ceil(value / 1000) + " k" },
+        formatter: value => {
+          return Math.ceil(value / 1000) + ' k';
+        },
       },
     },
     tooltip: {
@@ -122,47 +127,35 @@ const LineColumnArea = ({ labels, monthlySpendings, approved }: LineColumnAreaPr
       intersect: false,
       y: {
         formatter: function (y) {
-          if (typeof y !== "undefined") {
-            return Math.ceil(y / 1000) + " k"
+          if (typeof y !== 'undefined') {
+            return Math.ceil(y / 1000) + ' k';
           }
-          return y
+          return y;
         },
         title: {
-          formatter: (seriesName) => "",
+          formatter: seriesName => '',
         },
       },
     },
     grid: {
-      borderColor: "#f1f1f1",
+      borderColor: '#f1f1f1',
     },
-  }
+  };
 
-
-
-
-  let budgetChart = <div></div>
+  let budgetChart = <div></div>;
   if (labels && monthlySpendings && approved) {
-    budgetChart = <ReactApexChart
-      className="scrollableChart "
-      options={options}
-      series={series}
-      type="line"
-      height="350"
-
-    />
+    budgetChart = (
+      <ReactApexChart
+        className="scrollableChart "
+        options={options}
+        series={series}
+        type="line"
+        height="350"
+      />
+    );
   }
 
+  return <div>{budgetChart}</div>;
+};
 
-
-
-
-
-
-  return (
-    <div>
-      {budgetChart}
-    </div>
-  )
-}
-
-export default LineColumnArea
+export default LineColumnArea;

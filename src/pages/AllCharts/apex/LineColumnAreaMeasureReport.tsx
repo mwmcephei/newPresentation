@@ -1,52 +1,52 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
-import ReactApexChart from "react-apexcharts"
-import { ApexOptions } from 'apexcharts'
-import { Measure } from "../../../types"
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import { Measure } from '../../../types';
 
-
-
-
-
-const LineColumnArea = ({ measure }): ReactElement => {
-
+const LineColumnArea = ({ measure, labels }): ReactElement => {
   const acumulateArray = (array: number[]): number[] => {
-    let result = []
+    let result = [];
     for (let i = 0; i < array.length; i++) {
-      let acc = 0
+      let acc = 0;
       for (let j = 0; j <= i; j++) {
-        acc += array[j]
+        acc += array[j];
       }
-      result.push(acc)
+      result.push(acc);
     }
-    return result
-  }
+    return result;
+  };
 
   const approvedPerMonth = (array: number[], total: number): number[] => {
-    const perMonth = total / array.length
+    const perMonth = total / array.length;
     const result = array.map(a => {
-      return perMonth
-    })
-    return result
-  }
+      return perMonth;
+    });
+    return result;
+  };
 
   const series = [
     {
-      name: "Accumulated Monthly Spendings",
-      type: "area",
-      data: acumulateArray(measure.monthlySpendings ?? []),   //measure.monthlySpendings ? acumulateArray(measure.monthlySpendings) : [],
+      name: 'Accumulated Monthly Spendings',
+      type: 'area',
+      data: acumulateArray(measure.monthlySpendings ?? []),
     },
     {
-      name: "Monthly Spendings",
-      type: "column",
+      name: 'Monthly Spendings',
+      type: 'column',
       data: measure.monthlySpendings ? measure.monthlySpendings : [],
     },
     {
-      name: "Monthly Average Approved",
-      type: "line",
-      data: measure.monthlySpendings ? approvedPerMonth(measure.monthlySpendings, measure.budgetDetail.totalApprovedBudget) : [],
+      name: 'Monthly Average Approved',
+      type: 'line',
+      data: measure.monthlySpendings
+        ? approvedPerMonth(
+            measure.monthlySpendings,
+            measure.budgetDetail.totalApprovedBudget,
+          )
+        : [],
     },
-  ]
+  ];
 
   const getOptions = (): ApexOptions => {
     return {
@@ -58,30 +58,30 @@ const LineColumnArea = ({ measure }): ReactElement => {
       },
       stroke: {
         width: [0, 2, 4],
-        curve: "smooth",
+        curve: 'smooth',
       },
       plotOptions: {
         bar: {
-          columnWidth: "50%",
+          columnWidth: '50%',
         },
       },
       colors: [
-        "#556ee6",
-        "#f46a6a", // red
-        "#34c38f",
+        '#556ee6',
+        '#f46a6a', // red
+        '#34c38f',
       ],
       fill: {
         opacity: [0.25, 1, 1], // [0.85, 0.25, 1],
         gradient: {
           inverseColors: false,
-          shade: "light",
-          type: "vertical",
+          shade: 'light',
+          type: 'vertical',
           opacityFrom: 0.85,
           opacityTo: 0.55,
           stops: [0, 100, 100, 100],
         },
       },
-      labels: ["1", "2", "3", "4", "5", "6"],
+      labels: ['1', '2', '3', '4', '5', '6'],
       markers: {
         size: 0,
       },
@@ -89,15 +89,17 @@ const LineColumnArea = ({ measure }): ReactElement => {
         offsetY: 11,
       },
       xaxis: {
-        type: "datetime",
+        categories: labels,
       },
       yaxis: {
         title: {
-          text: "Spent €",
+          text: 'Spent €',
         },
         labels: {
           show: true,
-          formatter: (value) => { return Math.ceil(value / 1000) + " k" },
+          formatter: value => {
+            return Math.ceil(value / 1000) + ' k';
+          },
         },
       },
       tooltip: {
@@ -105,45 +107,27 @@ const LineColumnArea = ({ measure }): ReactElement => {
         intersect: false,
         y: {
           formatter: function (y) {
-            if (typeof y !== "undefined") {
-              return Math.ceil(y / 1000) + " k"
+            if (typeof y !== 'undefined') {
+              return Math.ceil(y / 1000) + ' k';
             }
-            return y
+            return y;
           },
           title: {
-            formatter: (seriesName) => "",
+            formatter: seriesName => '',
           },
         },
       },
       grid: {
-        borderColor: "#f1f1f1",
+        borderColor: '#f1f1f1',
       },
-    }
-  }
+    };
+  };
 
+  const budgetChart = (
+    <ReactApexChart options={getOptions()} series={series} height="350" />
+  );
 
+  return <div>{measure && budgetChart}</div>;
+};
 
-
-
-
-  const budgetChart = <ReactApexChart
-    options={getOptions()}
-    series={series}
-    height="350"
-  />
-
-
-
-
-
-
-
-
-  return (
-    <div>
-      {measure && budgetChart}
-    </div>
-  )
-}
-
-export default LineColumnArea
+export default LineColumnArea;

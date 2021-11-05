@@ -1,81 +1,78 @@
 // @ts-ignore
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react';
 // @ts-ignore
-import { Link, withRouter, useHistory } from "react-router-dom"
-import { map } from "lodash"
+import { Link, withRouter, useHistory } from 'react-router-dom';
+import { map } from 'lodash';
+import { Badge, Col, Container, Row, Table } from 'reactstrap';
+// @ts-ignore
 import {
-  Badge,
-  Col,
-  Container,
-  Row,
-  Table,
-} from "reactstrap"
-// @ts-ignore
-import { getMax, getColors, focusAreaColors, structureNumberForDisplay } from "../../globalVars"
+  getMax,
+  getColors,
+  focusAreaColors,
+  structureNumberForDisplay,
+  getShortenedName,
+} from '../../globalVars';
 import { PieChart, Pie, Cell } from 'recharts';
-import ProgressChart from "./ProgressChart"
-import { Measure } from "../../types"
+import ProgressChart from './ProgressChart';
+import { Measure } from '../../types';
 
-
-
-const ProjectsList = (props) => {
-  const history = useHistory()
+const ProjectsList = props => {
+  const history = useHistory();
 
   const getDoughnutData = (bigger, smaller) => {
     return [
       { name: 'a', value: bigger - smaller },
       { name: 'b', value: smaller },
     ];
-  }
-
-  const getShortenedName = (name, maxChars) => {
-    if (name.length > maxChars) {
-      return name.substring(0, maxChars) + "..."
-    } else {
-      return name
-    }
-  }
+  };
 
   function handleMeasureClick(measureID) {
-    history.push("/measureReports/" + measureID)
+    history.push('/measureReports/' + measureID);
   }
-
-
 
   return (
     <React.Fragment>
-
       <div className="table-responsive">
-        <Table className="project-list-table  align-middle " >
+        <Table className="project-list-table  align-middle ">
           <thead>
             <tr>
-              <th scope="col" >#</th>
-              <th scope="col" style={{ width: "100px" }}>Focus Area</th>
-              <th scope="col" >Measure Name</th>
+              <th scope="col">#</th>
+              <th scope="col" style={{ width: '100px' }}>
+                Focus Area
+              </th>
+              <th scope="col">Measure Name</th>
               <th scope="col">Budget</th>
-              <th scope="col" style={{ minWidth: "200px" }}></th>
+              <th scope="col" style={{ minWidth: '200px' }}></th>
             </tr>
           </thead>
-
 
           <tbody className="">
             {map(props.measures, (measure, index) => (
               <tr key={index} onClick={() => handleMeasureClick(measure._id)}>
+                <td>{measure.id}</td>
 
                 <td>
-                  {measure.id}
-                </td>
-
-                <td>
-                  <div className="d-flex justify-content-center text-center align-items-center
+                  <div
+                    className="d-flex justify-content-center text-center align-items-center
                           rounded-circle 
                           text-truncate"
-                    style={{ height: '40px', width: '40px', background: focusAreaColors[measure.focusArea] }} >
+                    style={{
+                      height: '40px',
+                      width: '40px',
+                      background: focusAreaColors[measure.focusArea],
+                    }}
+                  >
                     <b>{measure.focusArea}</b>
                   </div>
                 </td>
 
-                <td style={{ wordWrap: "break-word", maxWidth: "300px", minWidth: "200px" }}>
+                <td
+                  style={{
+                    wordWrap: 'break-word',
+                    maxWidth: '300px',
+                    minWidth: '200px',
+                  }}
+                >
                   <div>
                     <b>{measure.title}</b>
                   </div>
@@ -87,79 +84,117 @@ const ProjectsList = (props) => {
                   </div>
                 </td>
 
-
-                <td style={{ wordWrap: "break-word", maxWidth: "250px", minWidth: "250px" }}>
+                <td
+                  style={{
+                    wordWrap: 'break-word',
+                    maxWidth: '250px',
+                    minWidth: '250px',
+                  }}
+                >
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="">
-                      <div>
-                        Approved:
-                              </div>
-                      <div>
-                        Spent:
-                              </div>
+                      <div>Approved:</div>
+                      <div>Spent:</div>
                     </div>
 
                     <div className="m-1">
                       <div>
-                        {measure.approved > 1000 ? structureNumberForDisplay(measure.approved, false) : measure.approved.toFixed(0)} kEUR
-                              </div>
+                        {measure.approved > 1000
+                          ? structureNumberForDisplay(measure.approved, false)
+                          : measure.approved.toFixed(0)}{' '}
+                        kEUR
+                      </div>
                       <div>
-                        {measure.budgetDetail.spentBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.spentBudget, true) : (measure.budgetDetail.spentBudget / 1000).toFixed(0)} kEUR
-                              </div>
+                        {measure.budgetDetail.spentBudget > 1000
+                          ? structureNumberForDisplay(
+                              measure.budgetDetail.spentBudget,
+                              true,
+                            )
+                          : (measure.budgetDetail.spentBudget / 1000).toFixed(
+                              0,
+                            )}{' '}
+                        kEUR
+                      </div>
                     </div>
 
-                    <PieChart width={50} height={50} style={{ transform: "rotate(270deg)" }}>
-                      <Pie data={getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000))}
-                        dataKey="value" outerRadius={20} innerRadius={10}
+                    <PieChart
+                      width={50}
+                      height={50}
+                      style={{ transform: 'rotate(270deg)' }}
+                    >
+                      <Pie
+                        data={getDoughnutData(
+                          measure.approved,
+                          measure.budgetDetail.spentBudget / 1000,
+                        )}
+                        dataKey="value"
+                        outerRadius={20}
+                        innerRadius={10}
                         isAnimationActive={false}
                       >
-                        {getDoughnutData(measure.approved, (measure.budgetDetail.spentBudget / 1000)).map((
-                          // @ts-ignore
-                          entry, index) => (
-                          // @ts-ignore
-                          <Cell key={`cell-${index}`} fill={getColors(measure.budget)[index % 2]} />
-                        ))}
+                        {getDoughnutData(
+                          measure.approved,
+                          measure.budgetDetail.spentBudget / 1000,
+                        ).map(
+                          (
+                            // @ts-ignore
+                            entry,
+                            index,
+                          ) => (
+                            // @ts-ignore
+                            <Cell
+                              key={`cell-${index}`}
+                              fill={getColors(measure.budget)[index % 2]}
+                            />
+                          ),
+                        )}
                       </Pie>
                     </PieChart>
                   </div>
-
-
-
                 </td>
 
                 <td className="d-flex  align-items-center">
                   <div className="m-1 d-flex flex-column justify-content-center align-items-start">
-                    <div>
-                      Contract:
-                              </div>
-                    <div>
-                      Invoiced:
-                              </div>
+                    <div>Contract:</div>
+                    <div>Invoiced:</div>
                   </div>
 
                   <div className="mx-1 my-3 d-flex flex-column align-items-start ">
                     <div>
-                      <span>{measure.budgetDetail.contractBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.contractBudget, true) : (measure.budgetDetail.contractBudget / 1000).toFixed(2)} kEUR</span>
+                      <span>
+                        {measure.budgetDetail.contractBudget > 1000
+                          ? structureNumberForDisplay(
+                              measure.budgetDetail.contractBudget,
+                              true,
+                            )
+                          : (
+                              measure.budgetDetail.contractBudget / 1000
+                            ).toFixed(2)}{' '}
+                        kEUR
+                      </span>
                     </div>
                     <div>
-                      <span>{measure.budgetDetail.invoicedBudget > 1000 ? structureNumberForDisplay(measure.budgetDetail.invoicedBudget, true) : (measure.budgetDetail.invoicedBudget / 1000).toFixed(2)} kEUR</span>
+                      <span>
+                        {measure.budgetDetail.invoicedBudget > 1000
+                          ? structureNumberForDisplay(
+                              measure.budgetDetail.invoicedBudget,
+                              true,
+                            )
+                          : (
+                              measure.budgetDetail.invoicedBudget / 1000
+                            ).toFixed(2)}{' '}
+                        kEUR
+                      </span>
                     </div>
                   </div>
-
                 </td>
-
               </tr>
             ))}
           </tbody>
         </Table>
       </div>
+    </React.Fragment>
+  );
+};
 
-    </React.Fragment >
-  )
-}
-
-export default withRouter(ProjectsList)
-
-
-
-
+export default withRouter(ProjectsList);

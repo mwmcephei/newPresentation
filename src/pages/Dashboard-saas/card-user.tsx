@@ -1,50 +1,42 @@
-import React, { ReactElement, useState } from "react"
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardTitle,
-} from "reactstrap"
+import React, { ReactElement, useState } from 'react';
+import { Row, Col, Card, CardBody, CardTitle } from 'reactstrap';
 import CSS from 'csstype';
-import { getCircle, allianzBlue, structureNumberForDisplay } from "../../globalVars"
-
-
+import {
+  getCircle,
+  allianzBlue,
+  structureNumberForDisplay,
+} from '../../globalVars';
 
 type overviewPropType = {
-  overallProgress: number,
-  kpiProgress: number,
-  budget: number,
-  numberOfMeasures: number,
-  signal: number,
-}
-
+  overallProgress: number;
+  kpiProgress: number;
+  budget: number;
+  numberOfMeasures: number;
+  signal: number;
+};
 
 function CardUser(props: overviewPropType): ReactElement {
   const overallProgress_style: CSS.Properties = {
-    width: props.overallProgress + "%",
-    background: allianzBlue
+    width: props.overallProgress + '%',
+    background: allianzBlue,
   };
   const kpiProgress_style: CSS.Properties = {
-    width: props.kpiProgress + "%",
-    background: allianzBlue
+    width: props.kpiProgress + '%',
+    background: allianzBlue,
   };
 
-
-
-  const checkForDecimals = (input: number): number => {
-    const inputAsString = input + ""
-    if (inputAsString.includes(".")) {
-      return parseFloat(input.toFixed(1))
+  const ShortenToOneDecimalMax = (input: number): number => {
+    const inputAsString = input + '';
+    if (inputAsString.includes('.')) {
+      return parseFloat(input.toFixed(1));
     } else {
-      return input
+      return input;
     }
-  }
-
+  };
 
   return (
     <div>
-      <Card style={{ height: "400px" }}>
+      <Card style={{ height: '400px' }}>
         <CardBody>
           <CardTitle className="mb-1">IT Security Initiative</CardTitle>
           <h6 className="card-subtitle mb-3 ">HY2 2021</h6>
@@ -53,29 +45,26 @@ function CardUser(props: overviewPropType): ReactElement {
               <Row>
                 <Col xs="4">
                   <div className="text-center">
-                    <p className=" mb-2">
-                      Total Measures
-                          </p>
+                    <p className=" mb-2">Total Measures</p>
                     <div className="mt-3">
                       <h5 className="mb-0"> {props.numberOfMeasures} </h5>
                     </div>
                   </div>
                 </Col>
                 <Col xs="4">
-                  <div >
-                    <p className=" mb-2 text-center">
-                      Approved Budget
-                          </p>
+                  <div>
+                    <p className=" mb-2 text-center">Approved Budget</p>
                     <div className="text-center mt-3">
-                      <h5 className="mb-2 align-self-center"> {structureNumberForDisplay(props.budget, true)} kEUR</h5>
+                      <h5 className="mb-2 align-self-center">
+                        {' '}
+                        {structureNumberForDisplay(props.budget, true)} kEUR
+                      </h5>
                     </div>
                   </div>
                 </Col>
                 <Col xs="4" className="">
                   <div className="text-center">
-                    <p className=" mb-2">
-                      Overall Status
-                          </p>
+                    <p className=" mb-2">Overall Status</p>
                     <div className="text-center ">
                       <div className="justify-content-center mx-auto">
                         {getCircle(props.signal, 20)}
@@ -90,14 +79,19 @@ function CardUser(props: overviewPropType): ReactElement {
                     <li className="list-group-item">
                       <div className="py-2">
                         <h5 className="font-size-14">
-                          Overall Progress <span className="float-end">{checkForDecimals(props.overallProgress)}%</span>
+                          Overall Progress{' '}
+                          <span className="float-end">
+                            {ShortenToOneDecimalMax(props.overallProgress)}%
+                          </span>
                         </h5>
                         <div className="progress animated-progess progress-sm">
                           <div
                             className="progress-bar "
                             role="progressbar"
                             style={overallProgress_style}
-                            aria-valuenow={checkForDecimals(props.overallProgress)}
+                            aria-valuenow={ShortenToOneDecimalMax(
+                              props.overallProgress,
+                            )}
                             aria-valuemin={0}
                             aria-valuemax={100}
                           ></div>
@@ -107,14 +101,19 @@ function CardUser(props: overviewPropType): ReactElement {
                     <li className="list-group-item">
                       <div className="py-2">
                         <h5 className="font-size-14">
-                          KPI Progress <span className="float-end">{checkForDecimals(props.kpiProgress)}%</span>
+                          KPI Progress{' '}
+                          <span className="float-end">
+                            {ShortenToOneDecimalMax(props.kpiProgress)}%
+                          </span>
                         </h5>
                         <div className="progress animated-progess progress-sm">
                           <div
                             className="progress-bar"
                             role="progressbar"
                             style={kpiProgress_style}
-                            aria-valuenow={checkForDecimals(props.kpiProgress)}
+                            aria-valuenow={ShortenToOneDecimalMax(
+                              props.kpiProgress,
+                            )}
                             aria-valuemin={0}
                             aria-valuemax={100}
                           ></div>
@@ -127,9 +126,9 @@ function CardUser(props: overviewPropType): ReactElement {
             </div>
           </Row>
         </CardBody>
-      </Card >
+      </Card>
     </div>
-  )
+  );
 }
 
-export default CardUser
+export default CardUser;

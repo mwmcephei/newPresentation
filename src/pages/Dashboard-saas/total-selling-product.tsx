@@ -1,75 +1,58 @@
-import React, { ReactElement, useEffect, useState } from "react"
-import { Container, Row, Col, Card, CardBody, Table, CardTitle } from "reactstrap"
+import React, { ReactElement, useEffect, useState } from 'react';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Table,
+  CardTitle,
+} from 'reactstrap';
 import { PieChart, Pie, Cell } from 'recharts';
-import { getMax, getColors } from "../../globalVars"
-import { StatusProps } from "../../types"
+import { getMax, getColors } from '../../globalVars';
+import { StatusProps } from '../../types';
+import StreetLight from './StreetLight';
 
+interface TotalSellingProductProps {
+  artefacts: 0 | 1 | 2;
+  budget: 0 | 1 | 2;
+  risks: 0 | 1 | 2;
+  date1: string;
+}
 
-
-const TotalSellngProduct = ({ artefacts, budget, risks, date1 }): ReactElement => {
-
-
-  const getStreetLight = (color: number, size: number): ReactElement => {
-    return <div className="d-flex">
-      <PieChart width={30} height={30} >
-        <Pie data={[{ name: 'Geeksforgeeks', students: 400 },]}
-          dataKey="students" outerRadius={size}
-          fill={getColors(color === 0 ? color : -2)[1]}
-          stroke="none"
-          isAnimationActive={false} />
-      </PieChart>
-      <PieChart width={30} height={30} >
-        <Pie data={[{ name: 'Geeksforgeeks', students: 400 },]}
-          dataKey="students" outerRadius={size}
-          fill={getColors(color === 1 ? color : -2)[1]}
-          stroke="none"
-          isAnimationActive={false} />
-      </PieChart>
-      <PieChart width={30} height={30} >
-        <Pie data={[{ name: 'Geeksforgeeks', students: 400 },]}
-          dataKey="students" outerRadius={size}
-          fill={getColors(color === 2 ? color : -2)[1]}
-          stroke="none"
-          isAnimationActive={false} />
-      </PieChart>
-    </div>
-  }
-
-
+const TotalSellingProduct = ({
+  artefacts,
+  budget,
+  risks,
+  date1,
+}: TotalSellingProductProps): ReactElement => {
   return (
-
-    <Card style={{ height: "300px" }}>
+    <Card style={{ height: '300px' }}>
       <CardBody>
         <CardTitle className="mb-5 d-flex justify-content-between align-items-center ">
           <div>Status {date1}</div>
-          <div>{getStreetLight(getMax([artefacts, budget, risks]), 13)}</div>
+          <div>{StreetLight(getMax([artefacts, budget, risks]), 13)}</div>
         </CardTitle>
 
         <div className="table-responsive mt-4">
           <Table className="table align-middle mb-0">
             <tbody>
-              <tr  >
-                <td>
-                  Artefacts
-                                    </td>
+              <tr>
+                <td>Artefacts</td>
                 <td className="d-flex justify-content-end p-2">
-                  {getStreetLight(artefacts, 10)}
+                  {StreetLight(artefacts, 10)}
                 </td>
               </tr>
               <tr>
-                <td>
-                  Budget
-                                     </td>
+                <td>Budget</td>
                 <td className="d-flex justify-content-end p-2">
-                  {getStreetLight(budget, 10)}
+                  {StreetLight(budget, 10)}
                 </td>
               </tr>
               <tr>
-                <td>
-                  Risks & Issues
-                      </td>
+                <td>Risks & Issues</td>
                 <td className="d-flex justify-content-end p-2">
-                  {getStreetLight(risks, 10)}
+                  {StreetLight(risks, 10)}
                 </td>
               </tr>
             </tbody>
@@ -77,10 +60,7 @@ const TotalSellngProduct = ({ artefacts, budget, risks, date1 }): ReactElement =
         </div>
       </CardBody>
     </Card>
+  );
+};
 
-
-
-  )
-}
-
-export default TotalSellngProduct
+export default TotalSellingProduct;

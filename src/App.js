@@ -16,7 +16,7 @@ import VerticalLayout from "./components/VerticalLayout"
 import HorizontalLayout from "./components/HorizontalLayout"
 import NonAuthLayout from "./components/NonAuthLayout"
 import Index from "./components/HorizontalLayout"
-import Overview from "./components/pmoComponents/overview"
+import Overview from "./components/pmoComponents/Dashboard"
 import MeasureOverview from "./components/pmoComponents/MeasureOverview"
 import MeasureReports from "./components/pmoComponents/MeasureReports"
 import BudgetReport from "./components/pmoComponents/BudgetReport"
@@ -33,7 +33,7 @@ import { title } from "process"
 
 
 const App = props => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
 
   useEffect(() => {
     requestPermission()
@@ -53,8 +53,6 @@ const App = props => {
       .then(response => response.json())
       .then(response => {
         response.forEach(async notification => {
-          console.log("notification")
-          console.log(notification.seen)
           if (!notification.seen) {
             await LocalNotifications.schedule({
               notifications: [
@@ -69,29 +67,9 @@ const App = props => {
         });
       })
       .catch(error => {
-        console.log(error)
+        console.error(error)
       })
-
-
-    /*
-    await LocalNotifications.schedule({
-      notifications: [
-        {
-          title: "test",
-          body: "testbody",
-          id: 1,
-        }
-      ]
-    })
-    */
   }
-
-
-
-
-
-
-
 
   function getLayout() {
     let layoutCls = VerticalLayout
@@ -110,6 +88,8 @@ const App = props => {
 
 
   /*
+  // for development purpose
+  // simple login for desktop version while hosted on github pages for testing
   <Route path="/" exact>
                 <Login login={setLoggedIn} />
               </Route>
@@ -130,6 +110,7 @@ const App = props => {
             <Route path="/newPresentation" >
               <Login login={setLoggedIn} />
             </Route>
+
 
             <Route path="/upload" >
               <FileUpload />
