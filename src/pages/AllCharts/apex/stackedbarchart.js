@@ -1,7 +1,6 @@
 import React from "react"
 import ReactApexChart from "react-apexcharts"
 
-import React from "react"
 
 const stackedbarchart = props => {
   const options = {
@@ -15,7 +14,8 @@ const stackedbarchart = props => {
     dataLabels: {
       enabled: false,
     },
-    plotOptions: {
+    plot
+      : {
       bar: {
         columnWidth: "40%",
       },
@@ -82,7 +82,7 @@ const stackedbarchart = props => {
   return (
     <React.Fragment>
       <ReactApexChart
-        options={options}
+        //      options={options}
         series={series}
         type="bar"
         height="290"
